@@ -6,7 +6,16 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 	using namespace std;
 
-	class Solution2
+	class Solution
+	{
+	public:
+		virtual double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+		{
+			throw runtime_error("not implemented");
+		}
+	};
+
+	class Solution2 : public Solution
 	{
 	public:
 		double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2)
@@ -48,7 +57,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 			while (true)
 			{
 				size_t i1 = (v1_end - v1_start) / 2 + v1_start;  // median index or the lower median index, include this in the first half
-				size_t c1 = i1 + 1;  // number of elements I'm taking from v1, either exactly half or 1 fewer than the other half
+				size_t c1 = i1 + 1;  // number of elements I'm taking from v1, either exactly half (of the range denoted by [v1_start, v1_end]) or 1 fewer than the other half
 				size_t c2 = target - c1;
 				size_t i2 = c2 - 1;
 
@@ -117,7 +126,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 		}
 	};
 
-	class Solution3
+	class Solution3 : public Solution
 	{
 		// the same principles as Solution2 just better handling of corner cases (one array
 		// entirely preceeding the other), deal with the corner case up front.
@@ -195,7 +204,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 				* i1 will be out of v1's range, and indexing to i1 will crash.
 				*/
 				size_t i1 = (v1_end - v1_start) / 2 + v1_start;  // median index or the lower median index, include this in the first half
-				size_t c1 = i1 + 1;  // number of elements I'm taking from v1, either exactly half or 1 fewer than the other half
+				size_t c1 = i1 + 1;  // number of elements I'm taking from v1, either exactly half (of the range denoted by [v1_start, v1_end]) or 1 fewer than the other half
 				size_t c2 = target - c1;
 				size_t i2 = c2 - 1;
 
@@ -235,130 +244,289 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 	};
 
 
-	static void Test1()
+	/*
+	* A difference between this binary search and regular binary search is that
+	* in regular binary search, start and end can both move toward the middle and
+	* go across each other which essentially means there is no answer.
+	* In this binary search, "v1_start" starts at 0, as long as "v1_start" moves
+	* toward the middle once, it means I need to take some from v1 at least.
+	* "v1_start" and "v1_end" won't end up crossing each other and leaves me not
+	* knowing how many to take from v1.
+	* The only way "v1_start" and "v1_end" go across each other is that "v1_end" keeps
+	* moving to the left and eventually goes over "v1_start", and "v1_start" never moves.
+	* This means I must not take any element from v1.
+	* "v1_start" can also keep moving to the right and eventually crosses "v1_end", this
+	* doesn't mean a failure though, it just means I need to take entire v1.
+	*/
+
+	class Solution4 : public Solution
 	{
+		double getMedian(std::vector<int>& v1, std::vector<int>& v2)
+		{
+			bool odd = (v1.size() + v2.size()) % 2 == 1;
+			size_t target;
+			if (odd)
+			{
+				target = (v1.size() + v2.size()) / 2 + 1;
+			}
+			else
+			{
+				target = (v1.size() + v2.size()) / 2;
+			}
+
+			size_t v1_start = 0;              // start and end of the searching range
+			size_t v1_end = v1.size() - 1;
+
+			size_t i1 = 0;
+			size_t c1 = 0;
+			size_t c2 = 0;
+			size_t i2 = 0;
+
+			/*
+			* There is no way to not do special handling.
+			* If I don't check special cases before the while loop, I have to consider
+			* the case where v1 is entirely precede v2 and the two are equally long.
+			* a b c d e | f g h j k
+			*    v1          v2
+			* target is 5
+			* right answer is c1 = 5 and c2 = 0,
+			* but if I calculate i2, which is c2 -1, I get invalid value
+			*/
+			while (true)
+			{
+				i1 = (v1_end - v1_start) / 2 + v1_start;
+				c1 = i1 + 1;
+				c2 = target - c1;
+				i2 = c2 - 1;
+
+				if (c2 == 0)
+				{
+					// guaranteed v1.size <= v2.size
+					// so it's impossible that I take too many from v1 but c2 is 0 at this point
+					break;
+				}
+
+				if ((i1 + 1) < v1.size() && v2[i2] > v1[i1 + 1])  // I took too many from v2
+				{
+					v1_start = i1 + 1;
+					if (v1_start >= v1.size())
+					{
+						i1 = v1.size() - 1;
+						c1 = i1 + 1;
+						c2 = target - c1;
+						i2 = c2 - 1;
+						break;
+					}
+				}
+				else if ((i2 + 1) < v2.size() && v1[i1] > v2[i2 + 1])  // I took too many from v1
+				{
+					// I'm about to do i1 - 1, because i1 is size_t, result willl neven be negative, can't compare the result to 0, must compare i1 to 1 before the subtraction
+					if (i1 < 1)
+					{
+						c1 = 0;
+						c2 = target;
+						i2 = c2 - 1;
+						break;
+					}
+					v1_end = i1 - 1;
+					//if (v1_end < 0) // because I'm comparing v1_end to 0, v1_end must be signed integer, it can't be size_t which is unsigned.
+					//{
+					//	c1 = 0;
+					//	c2 = target;
+					//	i2 = c2 - 1;
+					//	break;
+					//}
+				}
+				else
+				{
+					// i1 and i2 are the correct values now
+					break;
+				}
+			}
+
+			if (c2 == 0)
+			{
+				if (odd)
+				{
+					return (double)v1[i1];
+				}
+				else
+				{
+					return (double)(v1[i1] + v2[0]) / 2.0;
+				}
+			}
+
+			if (c1 > 0)
+			{
+				// I'm taking at least 1 from v1, so 'i1' is an valid index into v1
+				if (odd)
+				{
+					return (double)std::max(v1[i1], v2[i2]);
+				}
+				else
+				{
+					return (double)(std::max(v1[i1], v2[i2]) + std::min(v1[i1 + 1], v2[i2 + 1])) / 2.0;
+				}
+			}
+			else
+			{
+				// I'm not taking any of v1
+				if (odd)
+				{
+					return (double)*(v2.begin() + target - 1);
+				}
+				else
+				{
+					return (double)(*(v2.begin() + target - 1) + *(v2.begin() + target)) / 2.0;
+				}
+			}
+		}
+
+	public:
+
+		double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2)
+		{
+			if (nums1.size() > nums2.size())
+				return getMedian(nums2, nums1);
+			else
+				return getMedian(nums1, nums2);
+		}
+	};
+
+
+
+	static void Test1(Solution *s)
+	{
+		// 1 2 3 4 5 6 7 8 9 11     ---   5.5
 		std::vector<int> nums1 { 1, 2, 4, 6, 9 };
 		std::vector<int> nums2 { 3, 5, 7, 8, 11 };
 
-		Solution3 s;
+		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		auto result = s.findMedianSortedArrays(nums1, nums2);
-
-		std::cout << result << '\n';
+		std::cout << result << ((result == 5.5) ? "Pass" : "Fail") << '\n';
 	}
 
-
-	static void Test2()
+	static void Test2(Solution *s)
 	{
+		// 1  2  4  6  7  8  11  14  18  19  21   ---  8
 		std::vector<int> nums1 { 1, 2, 4, 6 };
 		std::vector<int> nums2 { 7, 8, 11, 14, 18, 19, 21 };
 
-		Solution3 s;
+		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		auto result = s.findMedianSortedArrays(nums1, nums2);
-
-		std::cout << result << '\n';
+		std::cout << result << ((result == 8.0) ? "Pass" : "Fail") << '\n';
 	}
 
-
-	static void Test3()
+	static void Test3(Solution *s)
 	{
+		// 7, 8, 11, 14, 18, 19, 21, 33, 37, 38, 42, 48    --- 20
 		std::vector<int> nums1 { 33, 37, 38, 42, 48 };
 		std::vector<int> nums2 { 7, 8, 11, 14, 18, 19, 21 };
 
-		Solution3 s;
+		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		auto result = s.findMedianSortedArrays(nums1, nums2);
-
-		std::cout << result << '\n';
+		std::cout << result << ((result == 20.0) ? "Pass" : "Fail") << '\n';
 	}
 
-
-	static void Test4()
+	static void Test4(Solution* s)
 	{
+		// 3, 4, 5, 6, 7, 8, 11, 12, 13, 14
 		std::vector<int> nums1 { 3, 4, 5, 6, 7 };
 		std::vector<int> nums2 { 8, 11, 12, 13, 14 };
 
-		Solution3 s;
+		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		auto result = s.findMedianSortedArrays(nums1, nums2);
-
-		std::cout << result << '\n';
+		std::cout << result << ((result == 7.5) ? "Pass" : "Fail") << '\n';
 	}
 
-	static void Test5()
-	{
-		std::vector<int> nums1 { 3, 4, 5, 6, 7 };
-		std::vector<int> nums2 { 8, 11, 12, 13, 14 };
-
-		Solution3 s;
-
-		auto result = s.findMedianSortedArrays(nums2, nums1);
-
-		std::cout << result << '\n';
-	}
-
-	static void Test6()
+	static void Test5(Solution *s)
 	{
 		std::vector<int> nums1 { 3, 4, 5, 6, 7 };
 
-		Solution3 s;
+		auto result = s->findMedianSortedArrays(nums1, nums1);
 
-		auto result = s.findMedianSortedArrays(nums1, nums1);
-
-		std::cout << result << '\n';
+		std::cout << result << ((result == 5.0) ? "Pass" : "Fail") << '\n';
 	}
 
-	static void Test7() // This test case proves that Solution2 doesn't work, and in fact, it crashes.
+	static void Test6(Solution *s) // This test case proves that Solution2 doesn't work, and in fact, it crashes.
 	{
 		vector<int> nums1{ 11, 12, 13, 14 };
 		vector<int> nums2{ 1, 2, 3, 4, 5 };
-		Solution2 s;
-		double result = s.findMedianSortedArrays(nums1, nums2);
-		cout << result << '\n';
+		
+		double result = s->findMedianSortedArrays(nums1, nums2);
+		cout << result << ((result == 5.0) ? "Pass" : "Fail") << '\n';
 	}
 
-	static void Test8() // this test case proves that Solution3 doesn't work, and it can crash.
+	static void Test7(Solution *s) // this test case proves that Solution3 doesn't work, and it can crash.
 	{
 		vector<int> nums1{ 10, 11, 12, 13 };
 		vector<int> nums2{ 1,2,3,4,5,6,7,8,9,14,15 };
-		Solution3 s;
-		cout << s.findMedianSortedArrays(nums1, nums2) << '\n';
+		
+		double result = s->findMedianSortedArrays(nums1, nums2);
+
+		cout << result << ((result == 8.0) ? "Pass" : "Fail") << '\n';
 	}
 
 	void Test_0004_Median_of_Two_Sorted_Arrays()
 	{
-		int testCase = 0;
-		std::cout << "choose a test case:  ";
-		std::cin >> testCase;
-		switch (testCase)
+		Solution* solu;
+
+		int whichSolution = 0;
+
+		cout << "Choose a solution: 2, 3, 4 ";
+		cin >> whichSolution;
+
+		switch (whichSolution)
 		{
+		case 2:
+			solu = new Solution2();
+			break;
+		case 3:
+			solu = new Solution3();
+			break;
+		case 4:
+			solu = new Solution4();
+			break;
+		default:
+			throw runtime_error("invalid solution number");
+		}
+
+		int testCase = 0;
+		while (true)
+		{
+			std::cout << "choose a test case:  0: autotest, -1: exit, 1--7 test cases   ";
+			std::cin >> testCase;
+			switch (testCase)
+			{
+			case -1:
+				goto done;
+			case 0:
+				cout << "auto test is missing";
+				goto done;
 			case 1:
-				Test1();
+				Test1(solu);
 				break;
 			case 2:
-				Test2();
+				Test2(solu);
 				break;
 			case 3:
-				Test3();
+				Test3(solu);
 				break;
 			case 4:
-				Test4();
+				Test4(solu);
 				break;
 			case 5:
-				Test5();
+				Test5(solu);
 				break;
 			case 6:
-				Test6();
+				Test6(solu);
 				break;
 			case 7:
-				Test7();
+				Test7(solu);
 				break;
-			case 8:
-				Test8();
-				break;
-			default:
-				break;
+			}
 		}
+		done:
+		delete solu;
 	}
 }

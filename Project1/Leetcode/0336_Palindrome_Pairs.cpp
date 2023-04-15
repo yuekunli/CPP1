@@ -67,7 +67,7 @@ namespace _0336_Palindrome_Pairs {
 						candidates.push_back("");
 					else
 					{
-						int candidateLen = len - i - 1;
+						size_t candidateLen = len - i - 1;
 						string candidate = scopy.substr(0, candidateLen);
 						candidates.push_back(candidate);
 					}
