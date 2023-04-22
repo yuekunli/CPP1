@@ -176,6 +176,7 @@
     <ClCompile Include="Problems\Adaptiva_Interview2.cpp" />
     <ClCompile Include="Problems\Breadth_Parentheses_String.cpp" />
     <ClCompile Include="Problems\Combination_Permutation.cpp" />
+    <ClCompile Include="Problems\Fenwick_Tree_Postfix_Range.cpp" />
     <ClCompile Include="Problems\Get_Kth_of_Two_Sorted_Arrays.cpp" />
     <ClCompile Include="Problems\Inner_Join.cpp" />
     <ClCompile Include="Problems\Maximum_Sustainable_Cluster.cpp" />

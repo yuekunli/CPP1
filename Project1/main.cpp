@@ -397,11 +397,13 @@ int main()
     
     //Adaptiva_Interview2::Triangles::Test_Triangles();
 
+    Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
+
     //-----------------------------------------------------------------------
 
 
 
-    _0004_Median_of_Two_Sorted_Arrays::Test_0004_Median_of_Two_Sorted_Arrays();
+    //_0004_Median_of_Two_Sorted_Arrays::Test_0004_Median_of_Two_Sorted_Arrays();
 
     //_0011_Container_With_Most_Water::Test_0011_Container_With_Most_Water();
 

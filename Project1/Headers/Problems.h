@@ -62,3 +62,7 @@ namespace Adaptiva_Interview2 {
 		void Test_Triangles();
 	}
 }
+
+namespace Fenwick_Tree_Postfix_Range {
+	void Test_Fenwick_Tree_Postfix_Range();
+}
