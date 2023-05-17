@@ -591,6 +591,9 @@
     <ClCompile Include="Problems\Fenwick_Tree_Postfix_Range.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Problems\Minimum_Spanning_Tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Leetcode.h">

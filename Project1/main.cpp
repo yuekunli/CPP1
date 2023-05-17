@@ -397,7 +397,9 @@ int main()
     
     //Adaptiva_Interview2::Triangles::Test_Triangles();
 
-    Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
+    //Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
+
+    Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
 
     //-----------------------------------------------------------------------
 

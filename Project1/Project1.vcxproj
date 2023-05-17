@@ -182,6 +182,7 @@
     <ClCompile Include="Problems\Maximum_Sustainable_Cluster.cpp" />
     <ClCompile Include="Problems\Merge_Two_Sorted_Arrays.cpp" />
     <ClCompile Include="Problems\Minimum_Heaviest_Set.cpp" />
+    <ClCompile Include="Problems\Minimum_Spanning_Tree.cpp" />
     <ClCompile Include="Problems\Package_Install_Dependency.cpp" />
     <ClCompile Include="Problems\Parse_Integer_String.cpp" />
     <ClCompile Include="Problems\Related_Groups.cpp" />
