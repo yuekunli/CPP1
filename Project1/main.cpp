@@ -399,7 +399,9 @@ int main()
 
     //Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
 
-    Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
+    //Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
+
+    Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
 
     //-----------------------------------------------------------------------
 

@@ -70,3 +70,7 @@ namespace Fenwick_Tree_Postfix_Range {
 namespace Minimum_Spanning_Tree {
 	void Test_Minimum_Spanning_Tree();
 }
+
+namespace Minimum_Spanning_Tree2 {
+	void Test_Minimum_Spanning_Tree2();
+}
