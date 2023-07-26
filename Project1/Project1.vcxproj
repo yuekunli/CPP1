@@ -170,6 +170,7 @@
     <ClCompile Include="Leetcode\2213_Longest_Substring_One_Repeating_Char.cpp" />
     <ClCompile Include="Leetcode\2234_Max_Total_Beauty_Gardens.cpp" />
     <ClCompile Include="Leetcode\0012_Integer_to_Roman.cpp" />
+    <ClCompile Include="Leetcode\2761_Prime_Pairs_With_Target_Sum.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Problems\Adaptiva_HackerRank_Test.cpp" />
     <ClCompile Include="Problems\Adaptiva_Interview1.cpp" />

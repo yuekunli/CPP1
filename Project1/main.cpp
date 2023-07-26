@@ -401,7 +401,7 @@ int main()
 
     //Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
 
-    Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
+    //Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
 
     //-----------------------------------------------------------------------
 
@@ -413,7 +413,7 @@ int main()
 
     //_0012_Integer_to_Roman::Test_0012_Integer_to_Roman();
 
-    //_0037_Sudoku_Solver::Test_0037_Sudoku_Solver();
+    _0037_Sudoku_Solver::Test_0037_Sudoku_Solver();
 
     //_0038_Count_And_Say::Test_0038_Count_And_Say();
 
@@ -677,5 +677,5 @@ int main()
 
     //_2234_Max_Total_Beauty_Gardens::Test_2234_Max_Total_Beauty_Gardens();
 
-
+    //_2761_Prime_Pairs_With_Target_Sum::Test_2761_Prime_Pairs_With_Target_Sum();
 }
