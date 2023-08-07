@@ -4,7 +4,6 @@
 #include <vector>
 #include <random>
 #include <functional>
-#pragma warning(disable: 4267 4244)
 
 
 namespace _0042_Trapping_Rain_Water {
@@ -19,7 +18,7 @@ namespace _0042_Trapping_Rain_Water {
 		*/
 	public:
 
-		int trappedAmountInSegment(vector<int>& h, int start, int end)
+		int trappedAmountInSegment(vector<int>& h, size_t start, size_t end)
 		{
 			if (start == end - 1) return 0;
 
@@ -28,9 +27,9 @@ namespace _0042_Trapping_Rain_Water {
 			bool concave = true;
 			int sum = 0;  // volumn occupied by the black blocks
 			int hiInBetween = 0;
-			int hiIndex = -1;
+			size_t hiIndex = -1;
 
-			for (int i = start + 1; i <= end - 1; i++)
+			for (size_t i = start + 1; i <= end - 1; i++)
 			{
 				if (h[i] > lower)
 				{
@@ -47,7 +46,7 @@ namespace _0042_Trapping_Rain_Water {
 			}
 		
 			if (concave)
-				return (end - start - 1) * lower - sum;
+				return ((int)(end - start - 1)) * lower - sum;
 
 		
 			int r1, r2;
@@ -251,32 +250,34 @@ namespace _0042_Trapping_Rain_Water {
 			for (size_t i = 1; i < height.size(); i++)
 			{
 				auto it = unaccountedColumnIndex.rbegin();
+
 				if (height[*it] >= height[i])
 				{
 					unaccountedColumnIndex.emplace_back(i);
 				}
 				else
 				{
-					size_t toErase = unaccountedColumnIndex.size() - 1;
 					int waterLine = 0;
 					while (it != unaccountedColumnIndex.rend() && height[*it] <= height[i])
 					{
 						int trappedWater = (i - *it - 1) * (height[*it] - waterLine);
 						trappedWaterTotal += trappedWater;
 						waterLine = height[*it];
-						toErase--;
 						it = next(it);
 					}
 					if (it != unaccountedColumnIndex.rend())
 					{
 						int trappedWater = (i - *it - 1) * (height[i] - waterLine);
 						trappedWaterTotal += trappedWater;
-						unaccountedColumnIndex.erase(unaccountedColumnIndex.begin() + toErase + 1, unaccountedColumnIndex.end());
+						//unaccountedColumnIndex.erase(prev(it), unaccountedColumnIndex.end());
+						//                               |
+						//                              I can't just do this, because "it" is backward iterator whereas "erase" requires forward iterator
+						unaccountedColumnIndex.erase(prev(it).base(), unaccountedColumnIndex.end());
 						unaccountedColumnIndex.emplace_back(i);
 					}
 					else
 					{
-						unaccountedColumnIndex = vector<size_t>();
+						unaccountedColumnIndex.clear();
 						unaccountedColumnIndex.emplace_back(i);
 					}
 				}

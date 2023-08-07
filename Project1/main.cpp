@@ -413,13 +413,13 @@ int main()
 
     //_0012_Integer_to_Roman::Test_0012_Integer_to_Roman();
 
-    _0037_Sudoku_Solver::Test_0037_Sudoku_Solver();
+    //_0037_Sudoku_Solver::Test_0037_Sudoku_Solver();
 
     //_0038_Count_And_Say::Test_0038_Count_And_Say();
 
     //_0041_First_Missing_Positive::Test_0041_First_Missing_Positive();
 
-    //_0042_Trapping_Rain_Water::Test_0042_Trapping_Rain_Water();
+    _0042_Trapping_Rain_Water::Test_0042_Trapping_Rain_Water();
 
     //_0087_Scramble_String::Test_0087_Scramble_String();
 
