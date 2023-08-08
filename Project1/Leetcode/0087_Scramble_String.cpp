@@ -3,7 +3,6 @@
 #include <unordered_set>
 #include <algorithm>
 #include <iostream>
-#pragma warning(disable: 4267 4244)
 
 namespace _0087_Scramble_String {
 
@@ -76,7 +75,7 @@ public:
 	// if it's already checked that a range in s1 *cannot* be scrambled into a range in s2, I want to cache that too.
 
 
-	bool check_Recur(string& s1, string& s2, int s1Start, int s1End, int s2Start, int s2End)
+	bool check_Recur(string& s1, string& s2, size_t s1Start, size_t s1End, size_t s2Start, size_t s2End)
 	{
 		if (s1Start == s1End)
 		{
@@ -88,7 +87,7 @@ public:
 		if (result.first == s1.begin() + s1End + 1)
 			return true;
 
-		int totalLen = s1End - s1Start + 1;
+		size_t totalLen = s1End - s1Start + 1;
 
 		string sv1(s1.begin() + s1Start, s1.begin()+s1End+1);
 		string sv2(s2.begin() + s2Start, s2.begin()+s2End+1);
@@ -98,7 +97,7 @@ public:
 			return true;
 		}
 		
-		for (int firstPartLen = 1; firstPartLen <= totalLen-1; firstPartLen++)
+		for (size_t firstPartLen = 1; firstPartLen <= totalLen-1; firstPartLen++)
 		{
 			// s1: 5,  6,  7,  8,  9,  10 
 			// s2: 17, 18, 19, 20, 21, 22
@@ -139,17 +138,17 @@ class Solution2
 {
 public:
 
-	bool check_Recur(int***t, string& s1, string& s2, int s1Start, int s1End, int s2Start, int s2End)
+	bool check_Recur(signed char***t, string& s1, string& s2, size_t s1Start, size_t s1End, size_t s2Start, size_t s2End)
 	{
-		int totalLen = s1End - s1Start + 1;
+		size_t totalLen = s1End - s1Start + 1;
 
 		if (t[s1Start][s2Start][totalLen] != -1)
-			return (bool) t[s1Start][s2Start][totalLen];
+			return t[s1Start][s2Start][totalLen] == 1;
 
 		if (s1Start == s1End)
 		{
 			t[s1Start][s2Start][totalLen] = s1[s1Start] == s2[s2Start] ? 1 : 0;
-			return (bool) t[s1Start][s2Start][totalLen];
+			return t[s1Start][s2Start][totalLen] == 1;
 		}
 
 		// check if these two segments are already equal
@@ -163,7 +162,7 @@ public:
 		// should I check if these two segments at least have the same letters?
 		// i.e. maybe use is_permutation? It could be a waste of time, but also could save some time.
 
-		for (int firstPartLen = 1; firstPartLen <= totalLen - 1; firstPartLen++)
+		for (size_t firstPartLen = 1; firstPartLen <= totalLen - 1; firstPartLen++)
 		{
 			// s1: 5,  6,  7,  8,  9,  10      (these are indexes)
 			// s2: 17, 18, 19, 20, 21, 22
@@ -190,17 +189,17 @@ public:
 
 	bool isScramble(string s1, string s2)
 	{
-		int len = s1.size();
+		size_t len = s1.size();
 
-		int*** t = new int** [len];
+		signed char*** t = new signed char** [len];
 
-		for (int i = 0; i < len; i++)
+		for (size_t i = 0; i < len; i++)
 		{
-			t[i] = new int* [len];
-			for (int j = 0; j < len; j++)
+			t[i] = new signed char* [len];
+			for (size_t j = 0; j < len; j++)
 			{
-				t[i][j] = new int[len+1];
-				for (int k = 0; k <= len; k++)
+				t[i][j] = new signed char[len+1];
+				for (size_t k = 0; k <= len; k++)
 				{
 					t[i][j][k] = -1;
 				}
@@ -209,9 +208,9 @@ public:
 
 		bool result = check_Recur(t, s1, s2, 0, len - 1, 0, len - 1);
 
-		for (int i = 0; i < len; i++)
+		for (size_t i = 0; i < len; i++)
 		{
-			for (int j = 0; j < len; j++)
+			for (size_t j = 0; j < len; j++)
 			{
 				delete[] t[i][j];
 			}
