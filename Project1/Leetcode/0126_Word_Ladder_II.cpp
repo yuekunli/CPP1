@@ -23,7 +23,7 @@ class Solution
 
 public:
 
-	unordered_map<string, vector<string>> m;  // a word : all words that differ by 1 letter from this word
+	unordered_map<string, vector<string>> m;  // key: one word;  value: all words that differ by 1 letter from this word
 	vector<string> v[2];  // 2 sequential containers used in breadth-first-search
 	vector<vector<string>> answer;
 	int pathLen = 0; // length of shortest path
@@ -518,12 +518,11 @@ public:
 * But practically, I must not put another 'b' on the same level, because processing
 * it more than once is a waste of time.
 * 
-* Therefore, on a level, I need to remember what letters appear, and what their
+* Therefore, on a level, I need to remember what words appear, and what their
 * parents are. For example, I just put one instance of 'b' on level x+1, but I
 * remember that 'b''s parent can be 'p' or 'a'.
 * 
 * So each level is a hash map.
-* 
 * 
 */
 
@@ -531,6 +530,25 @@ class Solution5
 {
 
 	vector<unordered_map<string, vector<string>>> bfsTree;
+
+	/*
+	* vector: unordered_map<string, vector<string>>,  unordered_map<string, vector<string>>,  ....
+	*         \___________________________________/                  |            |
+	*                 one level of bfs tree                          |            the parents of this element
+	*                                                             an element on a certain level
+	*                                a
+	*                              /   \
+	*                             b      c
+	*                            /  \   /  \
+	*                           d    e  f   d
+	* 
+	* By using unordered_map, I reduce the copies of 'd' on the 3rd level, because 'd' will be the key
+	* of the unordered_map, but the value of 'd' in the unordered_map will be a vector comprising 'b' and 'c',
+	* I end up increasing the copies of 'b' and 'c'.
+	* I have to use pointers instead of hard copy of words to represents child-to-parent relation
+	*/
+
+
 	unordered_map<string, vector<string>> m; // adjacency list
 public:
 	
@@ -614,14 +632,14 @@ public:
 
 			auto& nextQ = bfsTree[bfsTree.size() - 1];
 
-			for (auto& a : bfsTree[currentLevelIndex])
+			for (auto& a : bfsTree[currentLevelIndex]) // I already have the current level full, and each level is in a map
 			{
-				if (a.first == endWord)
-				{
+				if (a.first == endWord) // I can quickly check if end word is in current level 
+				{  // I don't need to check end word while filling in next level
 					buildAnswers(endWord, currentLevelIndex);
 					return answers;
 				}
-
+				// if end word really is in current level, the half filled next level would be a waste.
 				for (auto& w : m[a.first])
 				{
 					if (seen.count(w) == 0)
@@ -631,6 +649,131 @@ public:
 				}
 			}
 			for (auto& b : nextQ)
+				seen.insert(b.first);
+			currentLevelIndex++;
+		}
+		return vector<vector<string>>{};
+	}
+};
+
+
+
+class Solution6
+{
+	vector<unordered_map<size_t, vector<size_t>>> bfs;
+	vector<vector<size_t>> m;
+
+	size_t beginWordIndex = -1;
+	size_t endWordIndex = -1;
+
+	vector<vector<string>> answers;
+
+	int diffLetterCount(string& s1, string& s2)
+	{
+		return inner_product(s1.begin(), s1.end(), s2.begin(), 0, plus<int>{},
+			[](auto& a, auto& b)
+			{
+				return a == b ? 0 : 1;
+			});
+	}
+
+	void buildAdjancency(string& beginword, string& endword, vector<string>& wordList)
+	{
+		m = vector<vector<size_t>>(wordList.size());
+
+		for (size_t i = 0; i < wordList.size(); i++)
+		{
+			string& w1 = wordList[i];
+			if (beginWordIndex == -1 && diffLetterCount(beginword, w1) == 0)
+				beginWordIndex = i;
+			if (endWordIndex == -1 && diffLetterCount(endword, w1) == 0)
+				endWordIndex = i;
+
+			for (size_t j = i + 1; j < wordList.size(); j++)
+			{
+				string& w2 = wordList[j];
+				if (diffLetterCount(w1, w2) == 1)
+				{
+					m[i].push_back(j);
+					m[j].push_back(i);
+				}
+			}
+		}
+	}
+
+	void buildAnswers2(size_t currentLevelIndex, size_t currentWordIndex, vector<string>& wordList, vector<string>& oneAnswer, string& beginword)
+	{
+		oneAnswer.push_back(wordList[currentWordIndex]);
+		if (currentLevelIndex == 0)
+		{
+			oneAnswer.push_back(beginword);
+			size_t len = oneAnswer.size();
+			answers.push_back(vector<string>(len));
+			copy(oneAnswer.rbegin(), oneAnswer.rend(), answers[answers.size() - 1].begin());
+			oneAnswer.erase(oneAnswer.end() - 1);
+		}
+		else
+		{
+			vector<size_t>& parents = bfs[currentLevelIndex][currentWordIndex];
+			for (size_t const& a : parents)
+			{
+				buildAnswers2(currentLevelIndex - 1, a, wordList, oneAnswer, beginword);
+			}
+		}
+		oneAnswer.erase(oneAnswer.end() - 1);
+	}
+
+	void buildAnswers(size_t currentLevelIndex, vector<string>& wordList, string& beginword)
+	{
+		vector<string> oneAnswer;
+		buildAnswers2(currentLevelIndex, endWordIndex, wordList, oneAnswer, beginword);
+	}
+
+public:
+
+	vector<vector<string>> findLadders(string beginword, string endword, vector<string>& wordList)
+	{
+		buildAdjancency(beginword, endword, wordList);
+		unordered_set<size_t> seen;
+		bfs.push_back(unordered_map<size_t, vector<size_t>>{});
+		size_t currentLevelIndex = 0;
+
+		if (beginWordIndex == -1)
+		{
+			for (size_t i = 0; i < wordList.size(); i++)
+			{
+				if (diffLetterCount(beginword, wordList[i]) == 1)
+					bfs[0][i].push_back(-1);
+			}
+		}
+		else
+		{
+			for (size_t& i : m[beginWordIndex])
+				bfs[0][i].push_back(beginWordIndex);
+		}
+
+		while (bfs[currentLevelIndex].size() > 0)
+		{
+			if (bfs[currentLevelIndex].count(endWordIndex) != 0)
+			{
+				buildAnswers(currentLevelIndex, wordList, beginword);
+				return answers;
+			}
+
+			bfs.push_back(unordered_map<size_t, vector<size_t>>{});
+
+			unordered_map<size_t, vector<size_t>>& nextLevel = *bfs.rbegin();
+			for (auto& a : bfs[currentLevelIndex]) // 'a' is an entry in the unordered_map, so it's a pair
+			{
+				for (auto& w : m[a.first])
+				{
+					if (seen.count(w) == 0)
+					{
+						nextLevel[w].push_back(a.first);
+					}
+				}
+			}
+			for (auto& b : nextLevel)
 				seen.insert(b.first);
 			currentLevelIndex++;
 		}
@@ -687,7 +830,7 @@ static void Test4()
 {
 	string beginWord = "red", endWord = "tax";
 	vector<string> wordList = { "ted","tex","red","tax","tad","den","rex","pee" };
-	Solution5 s;
+	Solution6 s;
 	vector<vector<string>>const& answer = s.findLadders(beginWord, endWord, wordList);
 	printAnswer(answer);
 }
@@ -767,7 +910,7 @@ static void Test5()
 		"xyyyy", "yyyyy", "yyyyw", "yyyww", "yywww", "ywwww", "wwwww", 
 		"wwvww", "wvvww", "vvvww", "vvvwz", "avvwz", "aavwz", "aaawz", 
 		"aaaaz" };
-	Solution5 s;
+	Solution6 s;
 	vector<vector<string>>const& answer = s.findLadders(beginWord, endWord, wordList);
 	printAnswer(answer);
 }
@@ -779,7 +922,7 @@ void Test_0126_Word_Ladder_II()
 	function<void(void)> tests[]={Test1, Test2, Test3, Test4, Test5};
 	while (true)
 	{
-		cout << "which test to run?  ";
+		cout << "which test to run?  (0 to exit) ";
 		cin >> test;
 		if (test == 0) break;
 		tests[test-1]();
