@@ -26,18 +26,21 @@ namespace _0131_Palindrome_Partitioning {
 				{
 					isPalin[index][i] = true;
 					string a = s.substr(index, i - index + 1);
-					vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
 
-					if (answerForTheRest.size() == 0 && i == n - 1)
+					if (i == n - 1)
 					{
 						answerAtIndex.emplace_back(initializer_list<string>({ a }));
 					}
-					for (vector<string>const& b : answerForTheRest)
+					else
 					{
-						vector<string> c;
-						c.push_back(a);
-						copy(b.begin(), b.end(), back_inserter(c));
-						answerAtIndex.emplace_back(c);
+						vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
+						for (vector<string>const& b : answerForTheRest)
+						{
+							vector<string> c;
+							c.push_back(a);
+							copy(b.begin(), b.end(), back_inserter(c));
+							answerAtIndex.emplace_back(c);
+						}
 					}
 				}
 			}
@@ -105,18 +108,21 @@ namespace _0131_Palindrome_Partitioning {
 				{
 					isPalin[index][i] = true;
 					string a = s.substr(index, i - index + 1);
-					vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
-
-					if (answerForTheRest.size() == 0 && i == n - 1)
+					
+					if (i == n - 1)
 					{
 						answerAtIndex.emplace_back(initializer_list<string>({ a }));
 					}
-					for (vector<string>const& b : answerForTheRest)
+					else
 					{
-						// this part is slightly different than the first solution, logically the same.
-						answerAtIndex.push_back(vector<string>{});
-						answerAtIndex.rbegin()->push_back(a);
-						copy(b.begin(), b.end(), back_inserter(*answerAtIndex.rbegin()));
+						vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
+						for (vector<string>const& b : answerForTheRest)
+						{
+							// this part is slightly different than the first solution, logically the same.
+							answerAtIndex.push_back(vector<string>{});
+							answerAtIndex.rbegin()->push_back(a);
+							copy(b.begin(), b.end(), back_inserter(*answerAtIndex.rbegin()));
+						}
 					}
 				}
 			}
@@ -164,18 +170,20 @@ namespace _0131_Palindrome_Partitioning {
 				{
 					isPalin[index][i] = true;
 					string a = s.substr(index, i - index + 1);
-					vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
-
-					if (answerForTheRest.size() == 0 && i == n - 1)
+					
+					if (i == n - 1)
 					{
 						answerAtIndex.emplace_back(initializer_list<string>({ a }));
-						break;
 					}
-					for (vector<string>const& b : answerForTheRest)
+					else
 					{
-						answerAtIndex.push_back(vector<string>{});
-						answerAtIndex.rbegin()->push_back(a);
-						answerAtIndex.rbegin()->insert(answerAtIndex.rbegin()->end(), b.begin(), b.end());
+						vector<vector<string>>const& answerForTheRest = solve(s, r, isPalin, i + 1);
+						for (vector<string>const& b : answerForTheRest)
+						{
+							answerAtIndex.push_back(vector<string>{});
+							answerAtIndex.rbegin()->push_back(a);
+							answerAtIndex.rbegin()->insert(answerAtIndex.rbegin()->end(), b.begin(), b.end());
+						}
 					}
 				}
 			}
