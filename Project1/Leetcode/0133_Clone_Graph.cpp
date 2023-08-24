@@ -40,9 +40,11 @@ namespace _0133_Clone_Graph {
             }
 
             Node* n = new Node{node->val};
+            cloneMap[n->val] = n;
+
             original.emplace_back(node);
             clone.emplace_back(n);
-
+            
             while (original.size() > 0)
             {
                 Node* n1 = original.front();
