@@ -90,7 +90,10 @@ namespace _0133_Clone_Graph {
     }
 
     /*
-    * Attention, potential danger of this destroy function
+    * The "neighbors" vector of each node is a vector of pointers, whereas I use a vector
+    * of integer to record visited nodes. This is fine when cloning the graph, but this strategy
+    * doesn't work when deleting the graph.
+    * For example:
     *         1
     *        / \
     *       2---3
@@ -104,13 +107,12 @@ namespace _0133_Clone_Graph {
     * is that there are multiple pointers pointing at one object, once that object
     * is deleted, all the pointers become invalid, and I have no way to know where
     * those pointers are when I delete the object.
-    */
-
-    /*
-    * shared_ptr is probably designed for this purpose!
-    */
-
-    /*
+    * 
+    * 
+    * Solution to this problem:
+    * (1). Change "visited" to a vector of pointers too
+    * (2). Build a separate map for neighbors using neighbors' values
+    *
     * For a graph like this:
     *    1 ------ 2
     *    |        |
@@ -125,6 +127,10 @@ namespace _0133_Clone_Graph {
     * So when I get back to '1', I check whether the value '3' is in "visited", it is, then skip it.
     * This way I don't need to dereference the neighbor's pointer, instead I read '3' from this
     * separate map.
+    */
+
+    /*
+    * shared_ptr is probably designed for this purpose?
     */
 
     static void buildNeighborValuesListRecursive(Node* n, unordered_set<int>& visited, unordered_map<int, vector<int>>& m)
