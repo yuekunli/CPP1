@@ -2,7 +2,19 @@
 #include<string>
 #include<sstream>
 #include<vector>
-#pragma warning(disable: 4267)
+
+
+/*
+* The ideal solution would be something like the "trapping rain water"
+* Use a stack, first a few elements would be pushed onto the stack,
+* as I examine the elements one by one, I gradually pop elements from the stack.
+* But the challenge here is that, for example, it's a regular hill shape segment,
+* upward first and then downward, say I push all the upward elements onto the stack,
+* then I see the peak, I can't decide how many candy to give to the peak until I see
+* the end of the downward progression.
+*/
+
+
 namespace _0135_Candy {
 
 	using namespace std;
@@ -32,7 +44,7 @@ namespace _0135_Candy {
 			while (i < n && ratings[i] == a)
 				i++;
 
-			if (i == n) return n;  // every child has equal rating, everyone gets 1 candy
+			if (i == n) return (int)n;  // every child has equal rating, everyone gets 1 candy
 
 			/*
 			*  5  5  5  5  8
@@ -40,7 +52,7 @@ namespace _0135_Candy {
 			*              i is here
 			* calculate the first 3 5's, the 4th '5' is part of a hill
 			*/
-			total += (i-1);
+			total += (int)(i-1);
 
 			bool up = ratings[i] > a ? true : false;
 
@@ -80,6 +92,11 @@ namespace _0135_Candy {
 					total += calculateHill(upTrendLength, downTrendLength);
 					up = true;
 					upTrendLength = 2;
+					// 'i' is already greater than 'i-1', the point at 'i-1' has been conunted as part of the previous hill,
+					// but I'm setting upTrendLength to 2, which means I'm counting the point at 'i-1' as the up trend,
+					// therefore, I'm double counting the valley point, I need to subtract that later.
+					// Why would I double count the valley point anyway? Because when I give a subarray to calculateHill,
+					// I need to make sure the lowest points at both ends can have 1 candy each.
 					duplicateValleyPoint++;
 					i++;
 				}
@@ -227,7 +244,7 @@ namespace _0135_Candy {
 	{
 		/*
 		* The reason I get so much trouble in the first two solutions is because
-		* I can't find a unified way to handler flat regions. Flag regions basically get 1 candy each child.
+		* I can't find a unified way to handle flat regions. Flat regions basically get 1 candy each child.
 		* 
 		* First find the children that deserve 1 candy and set their ratings to 0.
 		* Then every non-zero streak between two zeros must be a hill (not necessarily
@@ -252,11 +269,15 @@ namespace _0135_Candy {
 			* 
 			*              6    6
 			*          4            3
-			*       0  |            |  0
-			*         start        end
+			*       0                  0
+			* 
 			* peak index will be pointing to the first '6'.
-			* distance from peak to end will be longer.
-			* calculating the candies given to peak from right side,
+			* The second '6' doesn't meet the criteria for re-assignment.
+			* (i.e. it won't be changed to 0.)
+			* So the downhill progression is 6, 6, 3, 0, while the uphill
+			* progression is 0, 4, 6.
+			* Because downhill progression is longer, I have to calculate
+			* the candies given to peak from right side,
 			* I get the answer saying I need to give peak 4 candies,
 			* however in fact, both peak points need just 3 candies.
 			* 
@@ -265,7 +286,7 @@ namespace _0135_Candy {
 			* for example:
 			* 0  4  6  6  6  3  0  <-- ratings
 			*          |
-			*          this one will get 1 candy and get re-assigned 0 rating
+			*          this one will get re-assigned 0 rating and get 1 candy.
 			* So eventually there will be two segments.
 			* 
 			* Revised version of this function is in Solution4
@@ -348,7 +369,7 @@ namespace _0135_Candy {
 			}
 			
 			
-			// at this point, all the children that deserve 1 candy have their ratings set to 0
+			// at this point, all the children who deserve 1 candy have their ratings set to 0
 
 			size_t segmentStart = 0;
 			bool segmentStarted = false;
@@ -445,19 +466,21 @@ namespace _0135_Candy {
 	public:
 		int candy(vector<int>& ratings)
 		{
-			if (ratings.size() == 1) // this corner case is tested in leetcode judging machine.
+			if (ratings.size() == 1) // this corner case is tested in leetcode.
 				return 1;
 
 			int totalCandyForChildrenWithOneCandy = 0;
 
+			// Check for re-assignment:
+
 			int previousRating = ratings[0];
-			if (ratings[0] <= ratings[1])
+			if (ratings[0] <= ratings[1]) // check the first element
 			{
 				ratings[0] = 0;
 				totalCandyForChildrenWithOneCandy++;
 			}
 			size_t i = 1;
-			while (i < ratings.size() - 1)
+			while (i < ratings.size() - 1) // check till the second last element
 			{
 				if (previousRating >= ratings[i] && ratings[i] <= ratings[i + 1])
 				{
@@ -471,11 +494,13 @@ namespace _0135_Candy {
 				}
 				i++;
 			}
-			if (previousRating >= ratings[i])
+			if (previousRating >= ratings[i]) // check the last element
 			{
 				ratings[i] = 0;
 				totalCandyForChildrenWithOneCandy++;
 			}
+
+			// Re-assignment is done
 
 			size_t segmentStart = 0;
 			bool segmentStarted = false;
