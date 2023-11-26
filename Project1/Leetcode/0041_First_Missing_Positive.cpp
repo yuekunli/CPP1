@@ -29,13 +29,13 @@ namespace _0041_First_Missing_Positive {
 			for (size_t i = 0; i < len; i++)
 			{
 				if (nums[i] > len)
-					nums[i] = -1;
+					nums[i] = -1; // set to 0 or any negative number is OK
 				else if (0 < nums[i] && nums[i] <= len && nums[i] != i+1)
 				{
 					int n = nums[i];
 					size_t currentIndex = i;
 					size_t shouldBeIndex = nums[i] - 1;
-					nums[currentIndex] = 0;
+					nums[currentIndex] = 0; // set to 0 or any negative number is OK
 
 					while (currentIndex != shouldBeIndex)
 					{
@@ -53,15 +53,15 @@ namespace _0041_First_Missing_Positive {
 					}
 				}
 			}
-			int expectNext = 1;
+			int expect = 1;
 			for (int i = 0; i < len; i++)
 			{
-				if (nums[i] != expectNext)
-					return expectNext;
+				if (nums[i] != expect)
+					return expect;
 				else
-					expectNext++;
+					expect++;
 			}
-			return expectNext;
+			return expect;
 		}
 	};
 
@@ -71,7 +71,13 @@ namespace _0041_First_Missing_Positive {
 		random_device rd;
 		mt19937 gen;
 		uniform_int_distribution<> udi;
+
+		Solution s;
+
+		vector<int> v;
+
 	public:
+
 		AutoTest() :gen(rd()), udi(-(1 << 10), ((1 << 10) - 1)) {}    // binary:1000 is 8 = 2^3   1000 is also 1 right-shift 3 times
 
 		void generateVector(vector<int>& v)
@@ -99,9 +105,8 @@ namespace _0041_First_Missing_Positive {
 
 		void runOneTest()
 		{
-			vector<int> v;
 			generateVector(v);
-			Solution s;
+			
 			int fastAnswer = s.firstMissingPositive(v);
 			int bruteAnswer = bruteForce(v);
 
@@ -130,7 +135,7 @@ namespace _0041_First_Missing_Positive {
 
 		while (true)
 		{
-			cout << "1: manul test;  2: auto test;  0: exit  > ";
+			cout << "1: manual test;  2: auto test;  0: exit  > ";
 			cin >> option;
 			if (option == 0) break;
 			if (option == 1)

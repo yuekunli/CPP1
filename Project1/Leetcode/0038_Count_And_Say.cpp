@@ -1,19 +1,52 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
+#include <iomanip>
 #pragma warning(disable: 4267 4244)
 
 namespace _0038_Count_And_Say {
 
 	using namespace std;
 
+
+
+	/*
+	* An observation: I will never have same 4 letters in a row.
+	* Informal proof:
+	* How to get 4 same letters in a row?
+	* for example 33'33
+	* then the previous string must have 333'333
+	* but 333'333 will become 63 in the next string
+	*/
+
+	/*
+	* If at some point the string repeats an early result,
+	* the subsequent results are going to be repetitions too.
+	* For example:
+	* n = 7 result: .... (string a)
+	* n = 8 result: .... (string b)
+	* n = 9 result: .... (string c)
+	* ...
+	* n = 31 result .... (string b)  <- string b appears again.
+	* 
+	* Without further computation, I can say that n=32 result will be string c
+	* and n=33 result will be same as n=10
+	* 
+	* But how do I make use such pattern? I have to record every results as I progress,
+	* but I don't know whent he repetition is going to happen, it may not happen before
+	* I reach the target 'n'.
+	* 
+	* However, in reality, the length of the result strings grows almost exponentially!
+	*/
+
+
 	class Solution
 	{
 	public:
 
-		unordered_map<string, string>m;
+		unordered_map<string, string>m; // I wanted to use the map, but actually this solution doesn't add records into the map
 
-		// I wanted to use the map, but actually this solution doesn't add records into the map
+
 		string countAndSay(int n)
 		{
 			string last = "1";
@@ -48,14 +81,7 @@ namespace _0038_Count_And_Say {
 		}
 	};
 
-	/*
-	* An observation: I will never have same 4 letters in a row.
-	* Informal proof:
-    * How to get 4 same letters in a row?
-    * for example 33'33
-    * then the previous string must have 333'333
-    * but 333'333 will become 63 in the next string
-    */
+
 
 	class Solution2
 	{
@@ -79,7 +105,7 @@ namespace _0038_Count_And_Say {
 	public:
 
 		unordered_map<string, string>m;
-		int useCache = 0;   // this counts how times the map actually helped
+		int useCache = 0;   // this counts how many times the map actually helped
 
 		string solve_bruteForce(string a)
 		{
@@ -105,6 +131,7 @@ namespace _0038_Count_And_Say {
 		/*
 		* take the first segment, convert it to count+say
 		* then recursively solve the rest.
+		* I think this is a typical tail-recursion.
 		*/
 		string solve_Recur(string a)
 		{
@@ -131,7 +158,7 @@ namespace _0038_Count_And_Say {
 		}
 
 		/*
-		* This function tries to be more smart (but may not gain much on performance)
+		* This function tries to be smarter (but may not gain much on performance)
 		* If the input string is long, cut it to half, solve each one (this can be a
 		* performance improvement if using multi-thread). If the input is short, just
 		* use brute force. If it's between "long" and "short" solve the first segment
@@ -144,22 +171,17 @@ namespace _0038_Count_And_Say {
 				size_t i = a.size() / 2;
 				while (i < a.size() - 1 && a[i] == a[i + 1])
 					i++;
-				if (i == a.size() - 2 && a[i] == a[i + 1])
-				{
-					// the second half has all same character, and I don't know where
-					// this long streak actually starts.
-					// this probably won't happen, if a is longer than 10 characters
-					// then half of it is at least 5, and if there won't be
-					// 4 same character in a streak, I shouldn't find the entire
-					// second half is all the same.
-					return solve_bruteForce(a);
-				}
-				else
-				{
-					string a1 = a.substr(0, i + 1);
-					string a2 = a.substr(i + 1);
-					return solve_Recur2(a1) + solve_Recur2(a2);
-				}
+
+				// I don't need to worry about the second half
+				// being all same character, and not knowing
+				// where this long streak actually starts,
+				// because if a is longer than 10 characters,
+				// half of it is at least 5, and there won't be
+				// 4 same characters in a streak.
+
+				string a1 = a.substr(0, i + 1);
+				string a2 = a.substr(i + 1);
+				return solve_Recur2(a1) + solve_Recur2(a2);
 			}
 
 			if (m.find(a) != m.end())
@@ -174,6 +196,8 @@ namespace _0038_Count_And_Say {
 				return m[a];
 			}
 
+			// a's size is between 5 and 10
+
 			int j = 0;
 			int cnt = 0;
 			char current = a[0];
@@ -183,10 +207,10 @@ namespace _0038_Count_And_Say {
 				j++;
 			}
 			string answer;
-			if (j < a.size())
-				answer = to_string(cnt) + current + solve_Recur2(a.substr(j));
-			else
-				answer = to_string(cnt) + current;
+
+			// don't need to worry about entire "a" has the same character
+			answer = to_string(cnt) + current + solve_Recur2(a.substr(j));
+
 			m[a] = answer;
 			return answer;
 		}
@@ -243,9 +267,9 @@ namespace _0038_Count_And_Say {
 		}
 	};
 
-	class Solution4
+
+	class Solution4  // Simple iteration + brute force, no cache
 	{
-		// Simple iteration + brute force, no cache
 	public:
 		string countAndSay(int n)
 		{
@@ -266,6 +290,7 @@ namespace _0038_Count_And_Say {
 					answer = answer + to_string(cnt) + current;
 				}
 				last = answer;
+				//cout << setw(2) << i << "   " << last << '\n';
 			}
 			return last;
 		}

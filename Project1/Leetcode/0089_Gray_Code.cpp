@@ -1,4 +1,7 @@
-#include "LibHeaders.h"
+#include<iostream>
+#include<vector>
+#include<bitset>
+#include<math.h>
 
 namespace _0089_Gray_Code {
 
@@ -7,6 +10,36 @@ namespace _0089_Gray_Code {
 	class Solution
 	{
 	public:
+
+		/*
+		* Decimal     Gray Code
+		* 0           0 0 0 0
+		* 1           0 0 0 1
+		* 2           0 0 1 1
+		* 3           0 0 1 0
+		* 4           0 1 1 0
+		* 5           0 1 1 1
+		* 6           0 1 0 1
+		* 7           0 1 0 0
+		* 8           1 1 0 0
+		* 9           1 1 0 1
+		* 10          1 1 1 1
+		* 11          1 1 1 0
+		* 12          1 0 1 0
+		* 13          1 0 1 1
+		* 14          1 0 0 1
+		* 15          1 0 0 0
+		*                 | |
+		*                 | +-- value changes every 2 codes
+		*                 +--- value changes every 4 codes
+		*
+		* the second bit (from right) laid out:
+		* 0   0   1   1   1   1   0   0   0   0   1   1   1   1   0   0
+		* \___/   \___________________________________________________/
+		*   |                              |
+		*   |                              these follow the rule of "change every 4 codes"
+		*  these are called "first group", their values are always 0, just need to figure out home many are in this group
+		*/ 
 
 		/*
 		* 0...0 being the 1st code
@@ -37,6 +70,7 @@ namespace _0089_Gray_Code {
 				for (int j = 0; j < n; j++)
 				{
 					b[j] = xBitInKthCode(j + 1, i);
+					// unlike array, bitset[0] returns a reference to the right most bit
 				}
 				answer[i - 1] = b.to_ulong();
 				b.reset();

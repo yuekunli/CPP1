@@ -399,6 +399,10 @@ int main()
 
     //Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
 
+    //Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
+
+    //Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
+
     //-----------------------------------------------------------------------
 
 
@@ -673,5 +677,5 @@ int main()
 
     //_2234_Max_Total_Beauty_Gardens::Test_2234_Max_Total_Beauty_Gardens();
 
-
+    //_2761_Prime_Pairs_With_Target_Sum::Test_2761_Prime_Pairs_With_Target_Sum();
 }

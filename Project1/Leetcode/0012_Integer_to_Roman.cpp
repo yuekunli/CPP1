@@ -49,10 +49,10 @@ namespace _0012_Integer_to_Roman {
 		Solution s;
 		while (true)
 		{
-			cout << "input number: (1 ~ 3999) (negative number to exit)  > ";
+			cout << "input number: (1 ~ 3999) (zero to exit)  > ";
 			cin >> num;
 
-			if (num < 0) break;
+			if (num <= 0) break;
 
 			cout << s.intToRoman(num) << "\n\n";
 		}

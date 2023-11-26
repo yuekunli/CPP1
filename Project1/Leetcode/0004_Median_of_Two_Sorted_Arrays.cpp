@@ -9,10 +9,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 	class Solution
 	{
 	public:
-		virtual double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
-		{
-			throw runtime_error("not implemented");
-		}
+		virtual double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) = 0;
 	};
 
 	class Solution2 : public Solution
@@ -72,6 +69,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 					else
 					{
 						// this is the case where v1.size() == v2.size() and v1 is entirely less than v2
+						// and i1 is pointing at the last of v1, which means I'm taking the entire v1
 						if (v1[i1] <= v2[0])
 						{
 							return (double)(v1[i1] + v2[0]) / 2.0;
@@ -108,7 +106,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 				* Therefore this implementation is not 100% correct. The while loop doesn't have a terminating condition.
 				* It entirely relies on the logics inside it to stop the loop.
 				* If say v1 is 4-element long, and v2 is 10-element long, and v1 is entirely greater than v2.
-				* At some point I'll have v1_start > v1_end, (basically I'll keep moving v1_start to the right, but since
+				* At some point I'll have v1_end < v1_start, (basically I'll keep moving v1_end to the left, but since
 				* the correct answer is to take none from v1, as long as v1_start <= v1_end, I won't get the answer I want)
 				*/
 				else
@@ -301,8 +299,9 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 				if (c2 == 0)
 				{
-					// guaranteed v1.size <= v2.size
-					// so it's impossible that I take too many from v1 but c2 is 0 at this point
+					// only possibility for c2 = 0 is
+					//  a b c d e | f g h j k
+					//      v1          v2
 					break;
 				}
 
@@ -311,7 +310,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 					v1_start = i1 + 1;
 					if (v1_start >= v1.size())
 					{
-						i1 = v1.size() - 1;
+						i1 = v1.size() - 1; // I want to take more from v1, but this is the most I can get from v1
 						c1 = i1 + 1;
 						c2 = target - c1;
 						i2 = c2 - 1;
@@ -320,8 +319,8 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 				}
 				else if ((i2 + 1) < v2.size() && v1[i1] > v2[i2 + 1])  // I took too many from v1
 				{
-					// I'm about to do i1 - 1, because i1 is size_t, result willl neven be negative, can't compare the result to 0, must compare i1 to 1 before the subtraction
-					if (i1 < 1)
+					// I'm about to do i1 - 1, because i1 is size_t, result willl neven be negative, can't compare the result to 0, must compare i1 to 0 before the subtraction
+					if (i1 == 0) // taking 1 from v1, but it's still too many, so I have to take none from v1
 					{
 						c1 = 0;
 						c2 = target;
@@ -329,13 +328,6 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 						break;
 					}
 					v1_end = i1 - 1;
-					//if (v1_end < 0) // because I'm comparing v1_end to 0, v1_end must be signed integer, it can't be size_t which is unsigned.
-					//{
-					//	c1 = 0;
-					//	c2 = target;
-					//	i2 = c2 - 1;
-					//	break;
-					//}
 				}
 				else
 				{
@@ -358,7 +350,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 			if (c1 > 0)
 			{
-				// I'm taking at least 1 from v1, so 'i1' is an valid index into v1
+				// I'm taking at least 1 from v1, so 'i1' is a valid index into v1
 				if (odd)
 				{
 					return (double)std::max(v1[i1], v2[i2]);
@@ -378,6 +370,11 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 				else
 				{
 					return (double)(*(v2.begin() + target - 1) + *(v2.begin() + target)) / 2.0;
+					// Does this test break this solution here? -- Yes it does.
+					// target is 3, but I need the 3rd and 4th elements, when only considering target
+					// I don't need to take any from v1, but the next of target comes from v1.
+					// v2  1 2 3     6
+					// v1        4 5 
 				}
 			}
 		}
@@ -395,6 +392,148 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 
 
+	class Solution5 : public Solution
+	{
+		double getMedian(std::vector<int>& v1, std::vector<int>& v2)
+		{
+			bool odd = (v1.size() + v2.size()) % 2 == 1;
+			size_t target;
+			if (odd)
+			{
+				target = (v1.size() + v2.size()) / 2 + 1;
+			}
+			else
+			{
+				target = (v1.size() + v2.size()) / 2;
+			}
+
+			size_t v1_start = 0;              // start and end of the searching range
+			size_t v1_end = v1.size() - 1;
+
+			size_t i1 = 0;
+			size_t c1 = 0;
+			size_t c2 = 0;
+			size_t i2 = 0;
+
+			while (true)
+			{
+				i1 = (v1_end - v1_start) / 2 + v1_start;
+				c1 = i1 + 1;
+				c2 = target - c1;
+				i2 = c2 - 1;
+
+				if (c2 == 0)
+				{
+					// only possibility for c2 = 0 is
+					//  a b c d e | f g h j k
+					//      v1          v2
+					break;
+				}
+
+				if ((i1 + 1) < v1.size() && v2[i2] > v1[i1 + 1])  // I took too many from v2
+				{
+					if (i1 == v1.size() - 1)
+					{
+						// need to make sure v1_start is valid after doing i1+1
+						// only case where i1+1 becomes invalid is when i1 is already the last element in v1
+						// but if i1 is already the last one, it won't even come in this "if" clause.
+						// it won't pass the i1 +1 < v1.size() check
+						// on the other hand, if I'm already taking all v1, and v1 is guaranteed to be equal or shorter,
+						// it's impossible that I'm still not getting the solution
+					}
+					v1_start = i1 + 1;
+				}
+				else if ((i2 + 1) < v2.size() && v1[i1] > v2[i2 + 1])  // I took too many from v1
+				{
+					// i1 is size_t (unsigned), must compare with 0, instead of doing subtraction
+					if (i1 == 0)
+					{
+						c1 = 0;
+						c2 = target;
+						i2 = c2 - 1;
+						break;
+					}
+					v1_end = i1 - 1;
+				}
+				else
+				{
+					// i1 and i2 are the correct values now
+					break;
+				}
+			}
+
+			if (c2 == 0)
+			{
+				// only possibility for c2 = 0 is
+				//  a b c d e | f g h j k
+				//      v1          v2
+				// don't even need to check "odd"
+
+				return (double)(v1[i1] + v2[0]) / 2.0;
+			}
+
+			if (c1 == 0)
+			{
+				// I'm not taking any of v1, but this is to find "target",
+				// If overall count is even, I need target and the next of target,
+				// and this "next of target" can very likely come from v1
+				if (odd)
+				{
+					return (double)v2[i2];
+				}
+				else
+				{
+					if (i2 < v2.size() - 1)
+					{
+						return ((double) (v2[i2] + std::min(v2[i2 + 1], v1[0]))) / 2.0;
+					}
+					else
+					{
+						// i2 points at the last of v2
+						//  a b c d e | f g h j k
+						//      v2          v1
+						return (double)(v2[i2] + v1[0]) / 2.0;
+					}
+				}
+			}
+
+			// now is the general case, taking some from both v1 and v2
+			if (odd)
+			{
+				return (double)std::max(v1[i1], v2[i2]);
+			}
+			else
+			{
+				// v1            3   4   5
+				// v2    1   2                6   7   8   9   10
+				//                       |
+				//                      target
+				// i1 + 1 is invalid index into v1
+
+				if (i1 == v1.size() - 1)
+				{
+					return (double)(std::max(v1[i1], v2[i2]) + v2[i2 + 1]) / 2.0;
+				}
+				else if (i2 == v2.size() - 1) // this is the c1 == 0 case, which is handled above
+				{
+					throw runtime_error("Not expected execution path");
+				}
+				else
+					return ((double)(std::max(v1[i1], v2[i2]) + std::min(v1[i1 + 1], v2[i2 + 1]))) / 2.0;
+			}
+		}
+
+	public:
+
+		double findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2)
+		{
+			if (nums1.size() > nums2.size())
+				return getMedian(nums2, nums1);
+			else
+				return getMedian(nums1, nums2);
+		}
+	};
+
 	static void Test1(Solution *s)
 	{
 		// 1 2 3 4 5 6 7 8 9 11     ---   5.5
@@ -403,7 +542,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		std::cout << result << ((result == 5.5) ? "Pass" : "Fail") << '\n';
+		std::cout << result << ((result == 5.5) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test2(Solution *s)
@@ -414,7 +553,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		std::cout << result << ((result == 8.0) ? "Pass" : "Fail") << '\n';
+		std::cout << result << ((result == 8.0) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test3(Solution *s)
@@ -425,7 +564,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		std::cout << result << ((result == 20.0) ? "Pass" : "Fail") << '\n';
+		std::cout << result << ((result == 20.0) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test4(Solution* s)
@@ -436,7 +575,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		auto result = s->findMedianSortedArrays(nums1, nums2);
 
-		std::cout << result << ((result == 7.5) ? "Pass" : "Fail") << '\n';
+		std::cout << result << ((result == 7.5) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test5(Solution *s)
@@ -445,7 +584,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		auto result = s->findMedianSortedArrays(nums1, nums1);
 
-		std::cout << result << ((result == 5.0) ? "Pass" : "Fail") << '\n';
+		std::cout << result << ((result == 5.0) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test6(Solution *s) // This test case proves that Solution2 doesn't work, and in fact, it crashes.
@@ -454,7 +593,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 		vector<int> nums2{ 1, 2, 3, 4, 5 };
 		
 		double result = s->findMedianSortedArrays(nums1, nums2);
-		cout << result << ((result == 5.0) ? "Pass" : "Fail") << '\n';
+		cout << result << ((result == 5.0) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	static void Test7(Solution *s) // this test case proves that Solution3 doesn't work, and it can crash.
@@ -464,7 +603,17 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 		
 		double result = s->findMedianSortedArrays(nums1, nums2);
 
-		cout << result << ((result == 8.0) ? "Pass" : "Fail") << '\n';
+		cout << result << ((result == 8.0) ? "  Pass" : "  Fail") << '\n';
+	}
+
+	static void Test8(Solution* s) // this test case proves taht Solution4 is wrong
+	{
+		vector<int> nums1{ 4, 5 };
+		vector<int> nums2{ 1,2,3,6 };
+
+		double result = s->findMedianSortedArrays(nums1, nums2);
+
+		cout << result << ((result == 3.5) ? "  Pass" : "  Fail") << '\n';
 	}
 
 	void Test_0004_Median_of_Two_Sorted_Arrays()
@@ -473,7 +622,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 
 		int whichSolution = 0;
 
-		cout << "Choose a solution: 2, 3, 4 ";
+		cout << "Choose a solution: 2, 3, 4, 5 >  ";
 		cin >> whichSolution;
 
 		switch (whichSolution)
@@ -487,6 +636,9 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 		case 4:
 			solu = new Solution4();
 			break;
+		case 5:
+			solu = new Solution5();
+			break;
 		default:
 			throw runtime_error("invalid solution number");
 		}
@@ -494,7 +646,7 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 		int testCase = 0;
 		while (true)
 		{
-			std::cout << "choose a test case:  0: autotest, -1: exit, 1--7 test cases   ";
+			std::cout << "choose a test case:  0: autotest, -1: exit, 1--8 test cases   ";
 			std::cin >> testCase;
 			switch (testCase)
 			{
@@ -523,6 +675,9 @@ namespace _0004_Median_of_Two_Sorted_Arrays {
 				break;
 			case 7:
 				Test7(solu);
+				break;
+			case 8:
+				Test8(solu);
 				break;
 			}
 		}

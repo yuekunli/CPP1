@@ -4,8 +4,32 @@
 #include <vector>
 #include <random>
 #include <functional>
-#pragma warning(disable: 4267 4244)
 
+
+/*
+* Attention:
+* forward iterator and backward iterator differ by 1
+* vector:   X   X   X   X
+*               |   |
+*               |   +-- it.base() returns a forward iterator pointing at this element
+*               |
+*              "it" is a backward iterator pointing at this element
+* 
+* this is because:
+* 
+*               a         b       c      d
+*      rend()   X         X       X      rbegin()
+*        |      |         |       |      |
+*        |      |         |       |      +-------+
+*        |      |         |       +------+       |
+*        |      |         +-------+      |       |
+*        |      +---------+       |      |       |
+*        |                |       |      |       |
+*        +-------+        |       |      |       |
+*                |        |       |      |       |
+*               begin()   X       X      X      end()
+* 
+*/
 
 namespace _0042_Trapping_Rain_Water {
 
@@ -19,7 +43,7 @@ namespace _0042_Trapping_Rain_Water {
 		*/
 	public:
 
-		int trappedAmountInSegment(vector<int>& h, int start, int end)
+		int trappedAmountInSegment(vector<int>& h, size_t start, size_t end)
 		{
 			if (start == end - 1) return 0;
 
@@ -28,9 +52,9 @@ namespace _0042_Trapping_Rain_Water {
 			bool concave = true;
 			int sum = 0;  // volumn occupied by the black blocks
 			int hiInBetween = 0;
-			int hiIndex = -1;
+			size_t hiIndex = -1;
 
-			for (int i = start + 1; i <= end - 1; i++)
+			for (size_t i = start + 1; i <= end - 1; i++)
 			{
 				if (h[i] > lower)
 				{
@@ -47,7 +71,7 @@ namespace _0042_Trapping_Rain_Water {
 			}
 		
 			if (concave)
-				return (end - start - 1) * lower - sum;
+				return ((int)(end - start - 1)) * lower - sum;
 
 		
 			int r1, r2;
@@ -82,15 +106,15 @@ namespace _0042_Trapping_Rain_Water {
 	public:
 		int trap(vector<int>& height)
 		{
-			int len = height.size();
+			size_t len = height.size();
 			if (len == 1) return 0;
 
 			// find the first peak
 			// I probably don't need to look for the first peak after all, if there is an upward build-up
 			// at the beginning, if I start from the main loop, I'll look for the previous downward
 			// progression, but there isn't one, so it won't make a difference.
-			int firstPeak = -1;
-			for (int i = 0; i <= len-2; i++)
+			size_t firstPeak = len-1;
+			for (size_t i = 0; i <= len-2; i++)
 			{
 				if (height[i] > height[i + 1])
 				{
@@ -99,15 +123,15 @@ namespace _0042_Trapping_Rain_Water {
 				}
 			}
 		
-			if (firstPeak == -1 || firstPeak == len - 2)
+			if (firstPeak == len - 2 || firstPeak == len - 1)
 				return 0;
 
-			vector<int> downwardProgression;
-			bool upOrDown = true;
+			vector<size_t> downwardProgression;
+			bool upOrDown = true; // true means UP
 			int waterlineHeight = 0;
 			int sum = 0;
 
-			for (int i = firstPeak; i < len; i++)
+			for (size_t i = firstPeak; i < len; i++)
 			{
 				if (i == firstPeak || height[i - 1] > height[i])
 				{
@@ -136,23 +160,24 @@ namespace _0042_Trapping_Rain_Water {
 						auto it = downwardProgression.rbegin();
 						if (height[*it] > height[i])
 						{
-							sum += (i - (*it) - 1) * (height[i] - waterlineHeight);
+							sum += ((int)(i - (*it) - 1)) * (height[i] - waterlineHeight);
 							waterlineHeight = height[i];
 						}
 						else
 						{
 							while (it != downwardProgression.rend() && height[*it] <= height[i])
 							{
-								sum += (i - (*it) - 1)* (height[*it] - waterlineHeight);
+								sum += ((int)(i - (*it) - 1)) * (height[*it] - waterlineHeight);
 								waterlineHeight = height[*it];
 								it = next(it);
 							}
 							if (it != downwardProgression.rend())
 							{
-								sum += (i - (*it) - 1) * (height[i] - waterlineHeight);
+								sum += ((int)(i - (*it) - 1)) * (height[i] - waterlineHeight);
 								waterlineHeight = height[i];
 							}
 							downwardProgression.erase(it.base(), downwardProgression.end());
+							//                        backward and forward iterators differ by 1
 						}
 					}
 				}
@@ -170,9 +195,9 @@ namespace _0042_Trapping_Rain_Water {
 	public:
 		int trap(vector<int>& height)
 		{
-			int len = height.size();
+			size_t len = height.size();
 
-			vector<int> downwardProgression;
+			vector<size_t> downwardProgression;
 			bool upOrDown = true;    // true: in upward trend;   false: in downward trend
 			int waterlineHeight = 0;
 			int sum = 0;
@@ -180,7 +205,7 @@ namespace _0042_Trapping_Rain_Water {
 			downwardProgression.push_back(0);
 			upOrDown = false;
 
-			for (int i = 1; i < len; i++)
+			for (size_t i = 1; i < len; i++)
 			{
 				if (height[i - 1] > height[i])
 				{
@@ -211,13 +236,13 @@ namespace _0042_Trapping_Rain_Water {
 
 						while (it != downwardProgression.rend() && height[*it] <= height[i])
 						{
-							sum += (i - (*it) - 1) * (height[*it] - waterlineHeight);
+							sum += ((int)(i - (*it) - 1)) * (height[*it] - waterlineHeight);
 							waterlineHeight = height[*it];
 							it = next(it);
 						}
 						if (it != downwardProgression.rend())
 						{
-							sum += (i - (*it) - 1) * (height[i] - waterlineHeight);
+							sum += ((int)(i - (*it) - 1)) * (height[i] - waterlineHeight);
 							waterlineHeight = height[i];
 						}
 						downwardProgression.erase(it.base(), downwardProgression.end());
@@ -251,32 +276,34 @@ namespace _0042_Trapping_Rain_Water {
 			for (size_t i = 1; i < height.size(); i++)
 			{
 				auto it = unaccountedColumnIndex.rbegin();
+
 				if (height[*it] >= height[i])
 				{
 					unaccountedColumnIndex.emplace_back(i);
 				}
 				else
 				{
-					size_t toErase = unaccountedColumnIndex.size() - 1;
 					int waterLine = 0;
 					while (it != unaccountedColumnIndex.rend() && height[*it] <= height[i])
 					{
-						int trappedWater = (i - *it - 1) * (height[*it] - waterLine);
+						int trappedWater = ((int)(i - *it - 1)) * (height[*it] - waterLine);
 						trappedWaterTotal += trappedWater;
 						waterLine = height[*it];
-						toErase--;
 						it = next(it);
 					}
 					if (it != unaccountedColumnIndex.rend())
 					{
-						int trappedWater = (i - *it - 1) * (height[i] - waterLine);
+						int trappedWater = ((int)(i - *it - 1)) * (height[i] - waterLine);
 						trappedWaterTotal += trappedWater;
-						unaccountedColumnIndex.erase(unaccountedColumnIndex.begin() + toErase + 1, unaccountedColumnIndex.end());
+						//unaccountedColumnIndex.erase(it, unaccountedColumnIndex.end());
+						//                              |
+						//                              I can't just do this, because "it" is backward iterator whereas "erase" requires forward iterator
+						unaccountedColumnIndex.erase(it.base(), unaccountedColumnIndex.end());
 						unaccountedColumnIndex.emplace_back(i);
 					}
 					else
 					{
-						unaccountedColumnIndex = vector<size_t>();
+						unaccountedColumnIndex.clear();
 						unaccountedColumnIndex.emplace_back(i);
 					}
 				}

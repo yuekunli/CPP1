@@ -4,7 +4,6 @@
 #include<vector>
 #include<algorithm>
 #include<numeric>
-#pragma warning(disable:4244 4267)
 
 namespace _0134_Gas_Station {
 
@@ -26,7 +25,6 @@ namespace _0134_Gas_Station {
 			if (sum < 0)
 				return -1;
 			
-
 			for (size_t i = 1; i < len; i++)
 			{
 				supplyConsumeDiff[i] = supplyConsumeDiff[i - 1] + supplyConsumeDiff[i]; // why does this rolling sum method work?
@@ -34,14 +32,28 @@ namespace _0134_Gas_Station {
 
 			auto it = min_element(supplyConsumeDiff.begin(), supplyConsumeDiff.end());
 			if (it != supplyConsumeDiff.end() - 1)
-				return distance(supplyConsumeDiff.begin(), it) + 1;
+				return (int)distance(supplyConsumeDiff.begin(), it) + 1;
 			else
 				return 0;
-
 		}
 	};
 
-	class Solution2 // this is accepted by leetcode.
+
+	/*
+	* A    B    C     D     E     F     G
+	* 
+	* I try to start my journey from station A. I get to E, pump gas at E, while I'm on my way to F, I run out gas.
+	* The accumulation of gas when I arrive at E (before pumping gas at E) is always positive. It's impossible that the gas
+	* tank dropped below zero when I'm at B or C or D. Obviously, I can't start at A, note that I can just try starting at F.
+	* I don't need to try starting at B, C, D, or E. Why?
+	* Because the gas accumulation is always positive or at least zero. If I try starting at D, I don't even have the accumulation
+	* from A to D. I can't get pass F even when I have the accumulation from A to D, let alone not having it.
+	* So if I start at A and run out of gas between E and F, none of the stations between A and E (inclusively) is viable.
+	* This is why when I have loopedback and if I still don't have a viable option, there is no solution.
+	*/
+
+
+	class Solution2 // this is accepted by leetcode. And this is also O(N)
 	{
 	public:
 		int canCompleteCircuit(vector<int>& gas, vector<int>& cost)
@@ -93,7 +105,7 @@ namespace _0134_Gas_Station {
 						}
 					}
 					if (i == start)
-						return start;
+						return (int)start;
 				}
 			}
 		}

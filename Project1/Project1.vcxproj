@@ -170,6 +170,7 @@
     <ClCompile Include="Leetcode\2213_Longest_Substring_One_Repeating_Char.cpp" />
     <ClCompile Include="Leetcode\2234_Max_Total_Beauty_Gardens.cpp" />
     <ClCompile Include="Leetcode\0012_Integer_to_Roman.cpp" />
+    <ClCompile Include="Leetcode\2761_Prime_Pairs_With_Target_Sum.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Problems\Adaptiva_HackerRank_Test.cpp" />
     <ClCompile Include="Problems\Adaptiva_Interview1.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Problems\Maximum_Sustainable_Cluster.cpp" />
     <ClCompile Include="Problems\Merge_Two_Sorted_Arrays.cpp" />
     <ClCompile Include="Problems\Minimum_Heaviest_Set.cpp" />
+    <ClCompile Include="Problems\Minimum_Spanning_Tree.cpp" />
     <ClCompile Include="Problems\Package_Install_Dependency.cpp" />
     <ClCompile Include="Problems\Parse_Integer_String.cpp" />
     <ClCompile Include="Problems\Related_Groups.cpp" />

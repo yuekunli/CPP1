@@ -43,7 +43,7 @@ namespace _0132_Palindrome_Partitioning_II {
 			n = s.size();
 			vector<vector<bool>> isPalin(n, vector<bool>(n, false));
 
-			for (int i = 0; i < n; i++)
+			for (size_t i = 0; i < n; i++)
 			{
 				isPalin[i][i] = true;
 			}
@@ -62,6 +62,13 @@ namespace _0132_Palindrome_Partitioning_II {
 	*     /   |  \
 	* cut@2  @3   @4
 	* 
+	* probably not.
+	* 
+	* I can check all the substrings whether they are palindromes or not by spending n^2 time.
+	* For example, check all substrings with length=1, check all substrings with length=2, with length=3, ...
+	* But after knowing all these substrings, I still don't know where to cut when given a substring.
+	* For example, for the substring [5, 41], maybe the best way to cut is [5, 13], [14, 22], [23, 35], [36, 41].
+	* wherever I make the first cut, the two halves may not be palindromes
 	*/
 
 

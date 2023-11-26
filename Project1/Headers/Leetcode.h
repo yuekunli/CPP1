@@ -539,3 +539,7 @@ namespace _2213_Longest_Substring_One_Repeating_Char {
 namespace _2234_Max_Total_Beauty_Gardens {
 	void Test_2234_Max_Total_Beauty_Gardens();
 }
+
+namespace _2761_Prime_Pairs_With_Target_Sum {
+	void Test_2761_Prime_Pairs_With_Target_Sum();
+}
