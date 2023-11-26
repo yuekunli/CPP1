@@ -596,9 +596,6 @@
     <ClInclude Include="Headers\Leetcode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\LibHeaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\LocalHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -708,6 +705,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Demo\MarkAllenWeiss_BST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\LibHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
