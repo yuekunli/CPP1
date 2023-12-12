@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9168c4c8-b8dd-484d-876d-f6682d29f13d}</ProjectGuid>
-    <RootNamespace>LearnCPP</RootNamespace>
+    <ProjectGuid>{acb480ef-14af-4b05-a1b9-1738c129bb28}</ProjectGuid>
+    <RootNamespace>LogFileParser</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -104,8 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\YuekunLi\source\repos\ltc1\LearnCPP;C:\Users\YuekunLi\source\repos\ltc1\LearnCPP\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,83 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AggregatedHeaders.h" />
-    <ClInclude Include="Demo\BenGorman_BST.h" />
-    <ClInclude Include="Demo\MarkAllenWeiss_BST.h" />
-    <ClInclude Include="Headers\AccessPrivateMemberInCtor1.h" />
-    <ClInclude Include="Headers\AggregatedSmallExamples1.h" />
-    <ClInclude Include="Headers\BuiltInAlgo1.h" />
-    <ClInclude Include="Headers\CallFunctionInChildClass1.h" />
-    <ClInclude Include="Headers\ConstFunction1.h" />
-    <ClInclude Include="Headers\ConstOverloadResolution1.h" />
-    <ClInclude Include="Headers\ConstPointer1.h" />
-    <ClInclude Include="Headers\ConstRefToPtrAsFuncArg1.h" />
-    <ClInclude Include="Headers\ContainerLib1.h" />
-    <ClInclude Include="Headers\CopyByValueCtor_MoveCtor1.h" />
-    <ClInclude Include="Headers\DefaultConstructor1.h" />
-    <ClInclude Include="Headers\DefaultCtorCurlyBracesInitializer1.h" />
-    <ClInclude Include="Headers\DigitDynamicProgramming.h" />
-    <ClInclude Include="Headers\MemberInitializerListAndStdMove1.h" />
-    <ClInclude Include="Headers\NamespaceScope1.h" />
-    <ClInclude Include="Headers\NewArrayAndPointer1.h" />
-    <ClInclude Include="Headers\NonTemplClassSeparateDeclDef1.h" />
-    <ClInclude Include="Headers\OperatorNew1.h" />
-    <ClInclude Include="Headers\RawPtr_Vector_StdOptionalArray1.h" />
-    <ClInclude Include="Headers\RefOfReturnValue1.h" />
-    <ClInclude Include="Headers\RefToArrayAsFuncInput1.h" />
-    <ClInclude Include="Headers\ResetUniquePointer1.h" />
-    <ClInclude Include="Headers\ReturnValueOptimization1.h" />
-    <ClInclude Include="Headers\RvalueRefToLvalueRef1.h" />
-    <ClInclude Include="Headers\SetLowerBound1.h" />
-    <ClInclude Include="Headers\SortedSet1.h" />
-    <ClInclude Include="Headers\StringLiterals1.h" />
-    <ClInclude Include="Headers\ThreadExamples1.h" />
-    <ClInclude Include="Headers\TrailingReturnType1.h" />
-    <ClInclude Include="Headers\UniquePtrDemo1.h" />
-    <ClInclude Include="Headers\Vector1.h" />
-    <ClInclude Include="Headers\VectorInsert1.h" />
-    <ClInclude Include="Headers\VectorSeparateDeclareDefine1.h" />
-    <ClInclude Include="LibHeaders.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Demo\BuiltInAlgo1.cpp" />
-    <ClCompile Include="Demo\ClassDeclare1.cpp" />
-    <ClCompile Include="Demo\ContainerLib1.cpp" />
-    <ClCompile Include="Demo\DigitDynamicProgramming1.cpp" />
-    <ClCompile Include="Demo\NonTemplClassSeparateDeclDef1.cpp" />
-    <ClCompile Include="Demo\RawPtr_Vector_StdOptionalArray1.cpp" />
-    <ClCompile Include="Demo\SortedSet1.cpp" />
-    <ClCompile Include="Demo\ThreadExamples1.cpp" />
-    <ClCompile Include="Demo\UniquePtrDemo1.cpp" />
-    <ClCompile Include="Demo\Vector1.cpp" />
-    <ClCompile Include="Demo\VectorSeparateDeclareDefine1.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\AccessPrivateMemberInCtor1.cpp" />
-    <ClCompile Include="src\AggregatedSmallExamples1.cpp" />
-    <ClCompile Include="src\AssignToPointerRef1cpp.cpp" />
-    <ClCompile Include="src\binary_decimal_convert.cpp" />
-    <ClCompile Include="src\CallFunctionInChildClass1.cpp" />
-    <ClCompile Include="src\ConstFunction1.cpp" />
-    <ClCompile Include="src\ConstOverloadResolution1.cpp" />
-    <ClCompile Include="src\ConstPointer1.cpp" />
-    <ClCompile Include="src\ConstRefToPtrAsFuncArg1.cpp" />
-    <ClCompile Include="src\CopyByValueCtror_MoveCtor1cpp.cpp" />
-    <ClCompile Include="src\DefaultConstructor1.cpp" />
-    <ClCompile Include="src\DefaultCtorCurlyBracesInitializer1.cpp" />
-    <ClCompile Include="src\endian_swap.cpp" />
-    <ClCompile Include="src\MemberInitializerListAndStdMove1.cpp" />
-    <ClCompile Include="src\NamespaceScope1.cpp" />
-    <ClCompile Include="src\NewArrayAndPointer1.cpp" />
-    <ClCompile Include="src\OperatorNew1.cpp" />
-    <ClCompile Include="src\RefOfReturnValue1.cpp" />
-    <ClCompile Include="src\RefToArrayAsFuncInput1.cpp" />
-    <ClCompile Include="src\ResetUniquePointer1.cpp" />
-    <ClCompile Include="src\ReturnValueOptimization1.cpp" />
-    <ClCompile Include="src\RvalueRefToLvalueRef1.cpp" />
-    <ClCompile Include="src\SetLowerBound1.cpp" />
-    <ClCompile Include="src\StringLiterals1.cpp" />
-    <ClCompile Include="src\TrailingReturnType1.cpp" />
-    <ClCompile Include="src\VectorInsert1.cpp" />
+    <ClCompile Include="LogFileParser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
