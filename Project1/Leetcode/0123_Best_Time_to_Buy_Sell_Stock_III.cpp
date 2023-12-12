@@ -357,9 +357,124 @@ namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 		}
 	};
 
+
+
+	class Solution5
+	{
+		/*
+		* Using the same principle as the classic stock profit problem.
+		* First turn the every day price to price deltas.
+		* Go through the array of deltas as if I'm looking for a max profit for 1 trade.
+		* for example, this is the deltas' array:
+		* a  b  c  d  e  f  g  h  i  j  k
+		*                         |
+		*                       for example if I want to use 'i' as the 2nd trade, I should use
+		* the best trade among 'a' to 'h' as the 1st trade. That is also the max profit for a
+		* single trade among 'a' to 'h'. So I just keep a record of the max number as I move
+		* forward, when I arrive at 'i', that max number is the best first trade. I try to
+		* use a 2-trade strategy, see what I can get by make that best first trade and the 2nd
+		* trade at 'i'. If that yields a better outcome for a 2-trade strategy, record that.
+		* By the end of the array, I have the max number of the array which is the max profit by
+		* a single trade. I also tried all the possible 2-trade scenarios.
+		* The key is that when I record a better single trade, I need to reset the accumulation
+		* for the 2nd trade. For example, if I'm at 'e' and I find that is a better sell point
+		* for a single trade, I record that as the profit for a single trade. At that point, I've
+		* sole the stock and in order to do the 2nd trade, the accumulation has to start at 0.
+		*/
+	public:
+		int maxProfit(vector<int> prices)
+		{
+			size_t len = prices.size();
+			vector<int> deltas = vector<int>(len - 1, 0);
+			for (size_t i = 1; i < len; i++)
+			{
+				deltas[i - 1] = prices[i] - prices[i - 1];
+			}
+
+			deltas[0] = deltas[0] > 0 ? deltas[0] : 0;
+			int firstTradeMax = deltas[0];
+			int secondTradeMax = 0;
+			int twoTradesMax = 0;
+			int accum1 = deltas[0], accum2 = 0;
+			for (size_t i = 1; i < len - 1; i++)
+			{
+				if (deltas[i] + accum1 > 0)
+					accum1 += deltas[i];
+				else
+					accum1 = 0;
+
+				if (deltas[i] + accum2 > 0)
+				{
+					accum2 += deltas[i];
+					if (twoTradesMax < firstTradeMax + accum2)
+						twoTradesMax = firstTradeMax + accum2;
+				}
+				else
+					accum2 = 0;
+
+				if (firstTradeMax < accum1)
+				{
+					firstTradeMax = accum1;
+					accum2 = 0;
+				}
+			}
+			return max(firstTradeMax, twoTradesMax);
+
+		}
+	};
+
+	class Solution6
+	{
+		/*
+		* This is the same principle as solution 5.
+		* Upon further inspection of solution 5, I don't really need to create an array of deltas.
+		* When I examine an element in the delta's array, I only look at that element, not the ones
+		* in front of it or behind it. So I can calculate the delta as I go. Just iterate the price
+		* array and calculate the delta when I move each step forward.
+		*/
+	public:
+		int maxProfit(vector<int> prices)
+		{
+			int firstTradeMax = 0;
+			int secondTradeMax = 0;
+			int twoTradesMax = 0;
+			
+			int firstDelta = prices[1] - prices[0];
+			firstTradeMax = firstDelta > 0 ? firstDelta : 0;
+			int accum1 = firstTradeMax, accum2 = 0;
+
+			size_t len = prices.size();
+			for (size_t i = 2; i < len; i++)
+			{
+				int delta = prices[i] - prices[i - 1];
+				if (delta + accum1 > 0)
+					accum1 += delta;
+				else
+					accum1 = 0;
+
+				if (delta + accum2 > 0)
+				{
+					accum2 += delta;
+					if (twoTradesMax < firstTradeMax + accum2)
+						twoTradesMax = firstTradeMax + accum2;
+				}
+				else
+					accum2 = 0;
+
+				if (firstTradeMax < accum1)
+				{
+					firstTradeMax = accum1;
+					accum2 = 0;
+				}
+			}
+			return max(firstTradeMax, twoTradesMax);
+		}
+	};
+
+
 	void Test_0123_Best_Time_to_Buy_Sell_Stock_III()
 	{
-		Solution2 solu;
+		Solution5 solu;
 		string s;
 		vector<int> prices;
 		while (true)

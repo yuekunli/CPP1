@@ -695,5 +695,8 @@
     <ClInclude Include="Demo\MarkAllenWeiss_BST.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\LibHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
