@@ -132,7 +132,6 @@
     <ClInclude Include="AggregatedHeaders.h" />
     <ClInclude Include="Demo\BenGorman_BST.h" />
     <ClInclude Include="Demo\MarkAllenWeiss_BST.h" />
-    <ClInclude Include="Headers\AccessPrivateMemberInCtor1.h" />
     <ClInclude Include="Headers\AggregatedSmallExamples1.h" />
     <ClInclude Include="Headers\BuiltInAlgo1.h" />
     <ClInclude Include="Headers\CallFunctionInChildClass1.h" />
@@ -180,7 +179,7 @@
     <ClCompile Include="Demo\Vector1.cpp" />
     <ClCompile Include="Demo\VectorSeparateDeclareDefine1.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\AccessPrivateMemberInCtor1.cpp" />
+    <ClCompile Include="src\AccessOtherObjectSameClassPrivateMember.cpp" />
     <ClCompile Include="src\AggregatedSmallExamples1.cpp" />
     <ClCompile Include="src\AssignToPointerRef1cpp.cpp" />
     <ClCompile Include="src\binary_decimal_convert.cpp" />

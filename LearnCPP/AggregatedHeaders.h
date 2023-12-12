@@ -19,7 +19,6 @@
 #include "ReturnValueOptimization1.h"
 #include "ConstOverloadResolution1.h"
 #include "CopyByValueCtor_MoveCtor1.h"
-#include "AccessPrivateMemberInCtor1.h"
 #include "StringLiterals1.h"
 #include "RvalueRefToLvalueRef1.h"
 #include "SortedSet1.h"

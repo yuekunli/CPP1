@@ -1,6 +1,12 @@
 #include "AggregatedHeaders.h"
-#include <iostream>
 
+namespace AccessOtherObjectSameClassPrivateMember {
+    void Test_AccessOtherObjectSameClassPrivateMember();
+}
+
+namespace AssignToPointerRef1 {
+    void Test_AssignToPointerRef1();
+}
 
 namespace BinaryDecimalConvert {
     void Test_BinaryDecimalConvert();
@@ -21,7 +27,7 @@ int main()
 
     //CopyByValueCtor_MoveCtor1::Test_CopyByValueCtor_MoveCtor1();
 
-    //AccessPrivateMemberInCtor1::Test_AccessPrivateMemberInCtor1();
+    //AccessOtherObjectSameClassPrivateMember::Test_AccessOtherObjectSameClassPrivateMember();
 
     //StringLiterals1::Test_StringLiterals1();
 
@@ -35,8 +41,9 @@ int main()
 
     //DigitDynamicProgramming::Test_DigitDynamicProgramming();
 
-    BinaryDecimalConvert::Test_BinaryDecimalConvert();
+    //BinaryDecimalConvert::Test_BinaryDecimalConvert();
 
+    AssignToPointerRef1::Test_AssignToPointerRef1();
 
 
     //AggregatedSmallExamples1::Test_std_div();
