@@ -28,14 +28,7 @@
 #include "DigitDynamicProgramming.h"
 #include "NewArrayAndPointer1.h"
 
-
-
-
 #include "BuiltInAlgo1.h"
 #include "ContainerLib1.h"
 
 #include "ThreadExamples1.h"
-
-#include "Problems.h"
-
-#include "Leetcode.h"

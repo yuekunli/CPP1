@@ -19,7 +19,13 @@ namespace _0149_Max_Points_on_a_Line {
 		* other points, just the ones I haven't considered.
 		* If a line is formed by point 'a' and 'b', when I fix on point 'a', I already
 		* considered this line, when I fix on point 'b', I don't need to consider the
-		* same line again.
+		* same line again. If the line formed by 'a' and 'b' is eventually the answer
+		* and there are 5 points on that line in total, for example, 'a', 'b', 'c', 'd', 'e'
+		* When I examine 'a', I would have counted all 5 points. When I examine 'b', I only
+		* check points listed after 'b', I would find the same line, but I would only count
+		* 4 points on it, but that is OK, because I already recorded a best answer of 5 when
+		* I examined 'a'. But this is actually a waste of time, it would be good if there is
+		* a way to skip 'c', 'd', 'e' when I examine 'b'.
 		*/
 
 		int gcd(int a, int b)
@@ -36,18 +42,28 @@ namespace _0149_Max_Points_on_a_Line {
 			* range of the coordinators: -10^4 ~ 10^, biggest slop would be (2*10^4)/1
 			* The numerator is basically a 5-digit number. The denominator can be 5-digit as well.
 			* This hash function basically left shift the numerator 5 digits.
+			* The xDelta (the 2nd number in the pair) can be negative, does this handle that case correctly?
+			* Yes, it should work fine. A unique negative int will be cast to a unique unsigned long long,
+			* yDelta is shifted, I just stick the xDelta to the last 5 digit.
+			* I can change this code to doing binary shift, which is probably more convincing.
+			* int is at most 32-bit, unsigned long long is at least 64-bit, 
 			*/
-			unsigned long long operator()(pair<int, int>const&slop)const
+			unsigned long long operator()(pair<int, int> const & slop)const
 			{
-				return (unsigned long long)(slop.first) * 100'000ull + (unsigned long long)(slop.second);
+				//return (unsigned long long)(slop.first) * 100'000ull + (unsigned long long)(slop.second);
+				return (unsigned long long)(slop.first) << 32 + (unsigned long long)(slop.second); // this line is not tested, the above line is.
 			}
 		};
 
 		size_t n;
 		
-		int countLinesThruOnePoint(vector<vector<int>>& points, size_t i, vector<bool>&duplicate)
+		int countLinesThruOnePoint(vector<vector<int>>& points, size_t i, vector<bool>& duplicate)
 		{
 			unordered_map<pair<int, int>, int, PairHash> m;
+			//            \____________/   |
+			//                  |          value: number of points on the line with that slop
+			//                 key: slop
+
 			int maxCount = 0;
 			int dup = 0;
 			for (size_t j = i + 1; j < n; j++)
@@ -124,7 +140,7 @@ namespace _0149_Max_Points_on_a_Line {
 		/*
 		* Solution1 uses a vector to track duplicate points, but the constraints say all
 		* points are unique, so this solution simplify a little.
-		* Also need to handler a corner case: there is only 1 point in the "points" array.
+		* Also need to handle a corner case: there is only 1 point in the "points" array.
 		*/
 		int gcd(int a, int b)
 		{

@@ -552,16 +552,10 @@
     <ClCompile Include="Problems\Stock_Trade_Max_Profit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Problems\Maximum_Sustainable_Cluster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Problems\Minimum_Heaviest_Set.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Problems\Search_Missing_In_Consecutive_Sorted_Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Problems\Package_Install_Dependency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Leetcode\0012_Integer_to_Roman.cpp">
@@ -570,22 +564,10 @@
     <ClCompile Include="Problems\Merge_Two_Sorted_Arrays.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Problems\Inner_Join.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Leetcode\0691_Stickers_to_Spell_Word.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Problems\Adaptiva_HackerRank_Test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Leetcode\0777_Swap_Adjacent_in_LR_String.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Problems\Adaptiva_Interview1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Problems\Adaptiva_Interview2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Problems\Fenwick_Tree_Postfix_Range.cpp">
@@ -603,9 +585,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\LibHeaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\LocalHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Problems.h">
