@@ -48,6 +48,10 @@ namespace _0126_Word_Ladder_II {
 void Test_0126_Word_Ladder_II();
 }
 
+namespace _0127_Word_Ladder {
+	void Test_0127_Word_Ladder();
+}
+
 namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 	void Test_0123_Best_Time_to_Buy_Sell_Stock_III();
 }

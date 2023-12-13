@@ -20,9 +20,6 @@ using namespace std;
 
 class Solution
 {
-
-public:
-
 	unordered_map<string, vector<string>> m;  // key: one word;  value: all words that differ by 1 letter from this word
 	vector<string> v[2];  // 2 sequential containers used in breadth-first-search
 	vector<vector<string>> answer;
@@ -86,6 +83,7 @@ public:
 	* If the shortest path does go through "ebc", it's probably OK because I'm about to examine "ebc"
 	* right after I'm done with "dbc". But it wastes time.
 	*/
+public:
 	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList)
 	{
 		int currentPathLen = -1;
@@ -148,7 +146,6 @@ class Solution2
 	/*
 	* build an adjancency list at the beginning.
 	*/
-public:
 
 	unordered_map<string, vector<string>> m;
 	vector<string> v[2];
@@ -213,6 +210,7 @@ public:
 		}
 	}
 
+public:
 	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList)
 	{
 		buildAdjacency(beginWord, wordList);
@@ -269,7 +267,7 @@ public:
 class Solution3
 {
 	/*
-	* previous answers waste time on building the answers.
+	* previous solutions waste time on building the answers.
 	* When I look for the answer, I already build up a lot of information.
 	* I should not abandon them and re-run depth-first-search to find
 	* the answers again.
@@ -279,8 +277,6 @@ class Solution3
 	* So when I see the end word, I can trace back to the root which is the
 	* begin word by following the parent link.
 	*/
-
-public:
 
 	vector<vector<string>> answers;
 
@@ -321,6 +317,9 @@ public:
 			}
 		}
 	}
+
+public:
+
 	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList)
 	{
 		bfsTree.push_back(vector<A>{});
@@ -351,7 +350,7 @@ public:
 					}
 				}
 			}
-			for (auto& b : nextQ)
+			for (auto& b : nextQ) // this must be outside the previous for loop, because the same word can appear on the same level multiple times, but not on different levels
 				seen.insert(b.word);
 			currentLevelIndex++;
 		}
@@ -516,14 +515,18 @@ public:
 * going to create more eligible answers.
 * 
 * But practically, I must not put another 'b' on the same level, because processing
-* it more than once is a waste of time.
+* it more than once is a waste of time. The more descendants 'b' has, the more time is wasted.
+*           p   ......    a
+*           |             |
+*           b             b
+*          /|\           /|\
+* just think about this, if 'b' has a huge subtree, the deeper I go, the more duplications I have
 * 
-* Therefore, on a level, I need to remember what words appear, and what their
+* Therefore, on a level, I need to remember what words have appeared, and what their
 * parents are. For example, I just put one instance of 'b' on level x+1, but I
 * remember that 'b''s parent can be 'p' or 'a'.
 * 
 * So each level is a hash map.
-* 
 */
 
 class Solution5
@@ -591,7 +594,7 @@ public:
 		}
 	}
 
-	void buildAnswers2(string word, size_t treeLevel, vector<string>&oneAnswer) // building an answer is similar to a depth-first-search.
+	void buildAnswersRecur(string word, size_t treeLevel, vector<string>&oneAnswer) // building an answer is similar to a depth-first-search.
 	{
 		oneAnswer.push_back(word);
 		if (treeLevel == 0)
@@ -605,7 +608,7 @@ public:
 			vector<string>& parents = bfsTree[treeLevel][word];
 			for (auto const& w : parents)
 			{
-				buildAnswers2(w, treeLevel - 1, oneAnswer);
+				buildAnswersRecur(w, treeLevel - 1, oneAnswer);
 			}
 		}
 		oneAnswer.erase(oneAnswer.end() - 1);
@@ -614,7 +617,7 @@ public:
 	void buildAnswers(string endword, size_t treeLevel)
 	{
 		vector<string> oneAnswer;
-		buildAnswers2(endword, treeLevel, oneAnswer);
+		buildAnswersRecur(endword, treeLevel, oneAnswer);
 	}
 	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList)
 	{
@@ -660,6 +663,10 @@ public:
 
 class Solution6
 {
+	/*
+	* Avoid copying strings, use index of words in the very original wordlist.
+	*/
+
 	vector<unordered_map<size_t, vector<size_t>>> bfs;
 	vector<vector<size_t>> m;
 
@@ -701,7 +708,7 @@ class Solution6
 		}
 	}
 
-	void buildAnswers2(size_t currentLevelIndex, size_t currentWordIndex, vector<string>& wordList, vector<string>& oneAnswer, string& beginword)
+	void buildAnswersRecur(size_t currentLevelIndex, size_t currentWordIndex, vector<string>& wordList, vector<string>& oneAnswer, string& beginword)
 	{
 		oneAnswer.push_back(wordList[currentWordIndex]);
 		if (currentLevelIndex == 0)
@@ -717,7 +724,7 @@ class Solution6
 			vector<size_t>& parents = bfs[currentLevelIndex][currentWordIndex];
 			for (size_t const& a : parents)
 			{
-				buildAnswers2(currentLevelIndex - 1, a, wordList, oneAnswer, beginword);
+				buildAnswersRecur(currentLevelIndex - 1, a, wordList, oneAnswer, beginword);
 			}
 		}
 		oneAnswer.erase(oneAnswer.end() - 1);
@@ -726,7 +733,7 @@ class Solution6
 	void buildAnswers(size_t currentLevelIndex, vector<string>& wordList, string& beginword)
 	{
 		vector<string> oneAnswer;
-		buildAnswers2(currentLevelIndex, endWordIndex, wordList, oneAnswer, beginword);
+		buildAnswersRecur(currentLevelIndex, endWordIndex, wordList, oneAnswer, beginword);
 	}
 
 public:
@@ -734,7 +741,7 @@ public:
 	vector<vector<string>> findLadders(string beginword, string endword, vector<string>& wordList)
 	{
 		buildAdjancency(beginword, endword, wordList);
-		unordered_set<size_t> seen;
+		vector<bool>seen = vector<bool>(wordList.size(), false);
 		bfs.push_back(unordered_map<size_t, vector<size_t>>{});
 		size_t currentLevelIndex = 0;
 
@@ -767,14 +774,14 @@ public:
 			{
 				for (auto& w : m[a.first])
 				{
-					if (seen.count(w) == 0)
+					if (!seen[w])
 					{
 						nextLevel[w].push_back(a.first);
 					}
 				}
 			}
 			for (auto& b : nextLevel)
-				seen.insert(b.first);
+				seen[b.first] = true;
 			currentLevelIndex++;
 		}
 		return vector<vector<string>>{};

@@ -33,6 +33,7 @@
     <ClCompile Include="Leetcode\0123_Best_Time_to_Buy_Sell_Stock_III.cpp" />
     <ClCompile Include="Leetcode\0124_Binary_Tree_Maximum_Path_Sum.cpp" />
     <ClCompile Include="Leetcode\0126_Word_Ladder_II.cpp" />
+    <ClCompile Include="Leetcode\0127_Word_Ladder.cpp" />
     <ClCompile Include="Leetcode\0130_Surrounded_Regions.cpp" />
     <ClCompile Include="Leetcode\0131_Palindrome_Partitioning.cpp" />
     <ClCompile Include="Leetcode\0132_Palindrome_Partitioning_II.cpp" />

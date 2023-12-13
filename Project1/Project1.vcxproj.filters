@@ -491,5 +491,8 @@
     <ClCompile Include="Leetcode\2761_Prime_Pairs_With_Target_Sum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Leetcode\0127_Word_Ladder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
