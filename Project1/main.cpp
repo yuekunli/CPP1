@@ -1,32 +1,13 @@
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
-
 
 // exclude these warnings: 26495;6293;4018;4129;4566;26451;4267;4244
 
-
-
 #include "Problems.h"
-
 #include "Leetcode.h"
-
-using namespace std;
-
 
 int main()
 {
 
-
     //-----------------------------------------------------------------------
-
 
     //Get_Kth_of_Two_Sorted_Arrays::Test_Get_Kth_of_Two_Sorted_Arrays();
 
@@ -42,10 +23,7 @@ int main()
 
     //Search_Missing_In_Consecutive_Sorted_Array::Test_Search_Missing_In_Consecutive_Sorted_Array();
 
-
-
     //Merge_Two_Sorted_Arrays::Test_Merge_Two_Sorted_Arrays();
-
 
     //Fenwick_Tree_Postfix_Range::Test_Fenwick_Tree_Postfix_Range();
 
@@ -54,8 +32,6 @@ int main()
     //Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
 
     //-----------------------------------------------------------------------
-
-
 
     //_0004_Median_of_Two_Sorted_Arrays::Test_0004_Median_of_Two_Sorted_Arrays();
 
@@ -81,7 +57,9 @@ int main()
 
     _0123_Best_Time_to_Buy_Sell_Stock_III::Test_0123_Best_Time_to_Buy_Sell_Stock_III();
 
-    _0126_Word_Ladder_II::Test_0126_Word_Ladder_II();
+    //_0124_Binary_Tree_Maximum_Path_Sum::Test_0124_Binary_Tree_Maximum_Path_Sum();
+
+    //_0126_Word_Ladder_II::Test_0126_Word_Ladder_II();
 
     //_0130_Surrounded_Regions::Test_0130_Surrounded_Regions();
 

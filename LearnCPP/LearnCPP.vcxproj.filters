@@ -63,7 +63,7 @@
     <ClInclude Include="Headers\NewArrayAndPointer1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\NonTemplClassSeparateDeclDef1.h">
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\NonTemplClassSeparateDeclDef1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\OperatorNew1.h">
@@ -105,13 +105,13 @@
     <ClInclude Include="Headers\UniquePtrDemo1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Vector1.h">
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\Vector1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\VectorInsert1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\VectorSeparateDeclareDefine1.h">
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\VectorSeparateDeclareDefine1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Demo\BenGorman_BST.h">
@@ -131,7 +131,7 @@
     <ClCompile Include="src\AggregatedSmallExamples1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AssignToPointerRef1cpp.cpp">
+    <ClCompile Include="src\UniquePtrInitializeAndCopy1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CallFunctionInChildClass1.cpp">
@@ -200,7 +200,7 @@
     <ClCompile Include="Demo\BuiltInAlgo1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\ClassDeclare1.cpp">
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\ClassDeclare1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Demo\ContainerLib1.cpp">
@@ -209,7 +209,7 @@
     <ClCompile Include="Demo\DigitDynamicProgramming1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\NonTemplClassSeparateDeclDef1.cpp">
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\NonTemplClassSeparateDeclDef1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Demo\RawPtr_Vector_StdOptionalArray1.cpp">
@@ -224,10 +224,10 @@
     <ClCompile Include="Demo\UniquePtrDemo1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\Vector1.cpp">
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\Vector1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\VectorSeparateDeclareDefine1.cpp">
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\VectorSeparateDeclareDefine1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">

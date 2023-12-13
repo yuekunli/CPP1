@@ -19,19 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Demo\BuiltInAlgo1.cpp" />
-    <ClCompile Include="Demo\ClassDeclare1.cpp" />
-    <ClCompile Include="Demo\ContainerLib1.cpp" />
-    <ClCompile Include="Demo\DigitDynamicProgramming1.cpp" />
-    <ClCompile Include="Demo\NonTemplClassSeparateDeclDef1.cpp" />
-    <ClCompile Include="Demo\RawPtr_Vector_StdOptionalArray1.cpp" />
-    <ClCompile Include="Demo\SortedSet1.cpp" />
-    <ClCompile Include="Demo\ThreadExamples1.cpp" />
-    <ClCompile Include="Demo\UniquePtrDemo1.cpp" />
-    <ClCompile Include="Demo\Vector1.cpp" />
-    <ClCompile Include="Demo\VectorSeparateDeclareDefine1.cpp" />
     <ClCompile Include="Leetcode\0004_Median_of_Two_Sorted_Arrays.cpp" />
     <ClCompile Include="Leetcode\0011_Container_With_Most_Water.cpp" />
+    <ClCompile Include="Leetcode\0012_Integer_to_Roman.cpp" />
     <ClCompile Include="Leetcode\0037_Sudoku_Solver.cpp" />
     <ClCompile Include="Leetcode\0038_Count_And_Say.cpp" />
     <ClCompile Include="Leetcode\0041_First_Missing_Positive.cpp" />
@@ -41,6 +31,7 @@
     <ClCompile Include="Leetcode\0115_Distinct_Subsequences.cpp" />
     <ClCompile Include="Leetcode\0117_Populating_Next_Right_Pointers_in_Each_Node_II.cpp" />
     <ClCompile Include="Leetcode\0123_Best_Time_to_Buy_Sell_Stock_III.cpp" />
+    <ClCompile Include="Leetcode\0124_Binary_Tree_Maximum_Path_Sum.cpp" />
     <ClCompile Include="Leetcode\0126_Word_Ladder_II.cpp" />
     <ClCompile Include="Leetcode\0130_Surrounded_Regions.cpp" />
     <ClCompile Include="Leetcode\0131_Palindrome_Partitioning.cpp" />
@@ -169,7 +160,6 @@
     <ClCompile Include="Leetcode\2179_Count_Good_Triplets_in_Array.cpp" />
     <ClCompile Include="Leetcode\2213_Longest_Substring_One_Repeating_Char.cpp" />
     <ClCompile Include="Leetcode\2234_Max_Total_Beauty_Gardens.cpp" />
-    <ClCompile Include="Leetcode\0012_Integer_to_Roman.cpp" />
     <ClCompile Include="Leetcode\2761_Prime_Pairs_With_Target_Sum.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Problems\Breadth_Parentheses_String.cpp" />
@@ -183,67 +173,8 @@
     <ClCompile Include="Problems\Related_Groups.cpp" />
     <ClCompile Include="Problems\Search_Missing_In_Consecutive_Sorted_Array.cpp" />
     <ClCompile Include="Problems\Stock_Trade_Max_Profit.cpp" />
-    <ClCompile Include="SyntaxTests\AccessPrivateMemberInCtor1.cpp" />
-    <ClCompile Include="SyntaxTests\AggregatedSmallExamples1.cpp" />
-    <ClCompile Include="SyntaxTests\AssignToPointerRef1cpp.cpp" />
-    <ClCompile Include="SyntaxTests\CallFunctionInChildClass1.cpp" />
-    <ClCompile Include="SyntaxTests\ConstFunction1.cpp" />
-    <ClCompile Include="SyntaxTests\ConstOverloadResolution1.cpp" />
-    <ClCompile Include="SyntaxTests\ConstPointer1.cpp" />
-    <ClCompile Include="SyntaxTests\ConstRefToPtrAsFuncArg1.cpp" />
-    <ClCompile Include="SyntaxTests\CopyByValueCtror_MoveCtor1cpp.cpp" />
-    <ClCompile Include="SyntaxTests\DefaultConstructor1.cpp" />
-    <ClCompile Include="SyntaxTests\DefaultCtorCurlyBracesInitializer1.cpp" />
-    <ClCompile Include="SyntaxTests\MemberInitializerListAndStdMove1.cpp" />
-    <ClCompile Include="SyntaxTests\NamespaceScope1.cpp" />
-    <ClCompile Include="SyntaxTests\NewArrayAndPointer1.cpp" />
-    <ClCompile Include="SyntaxTests\OperatorNew1.cpp" />
-    <ClCompile Include="SyntaxTests\RefOfReturnValue1.cpp" />
-    <ClCompile Include="SyntaxTests\RefToArrayAsFuncInput1.cpp" />
-    <ClCompile Include="SyntaxTests\ResetUniquePointer1.cpp" />
-    <ClCompile Include="SyntaxTests\ReturnValueOptimization1.cpp" />
-    <ClCompile Include="SyntaxTests\RvalueRefToLvalueRef1.cpp" />
-    <ClCompile Include="SyntaxTests\SetLowerBound1.cpp" />
-    <ClCompile Include="SyntaxTests\StringLiterals1.cpp" />
-    <ClCompile Include="SyntaxTests\TrailingReturnType1.cpp" />
-    <ClCompile Include="SyntaxTests\VectorInsert1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Demo\BenGorman_BST.h" />
-    <ClInclude Include="Demo\MarkAllenWeiss_BST.h" />
-    <ClInclude Include="Headers2\AccessPrivateMemberInCtor1.h" />
-    <ClInclude Include="Headers2\AggregatedSmallExamples1.h" />
-    <ClInclude Include="Headers2\BuiltInAlgo1.h" />
-    <ClInclude Include="Headers2\CallFunctionInChildClass1.h" />
-    <ClInclude Include="Headers2\ConstFunction1.h" />
-    <ClInclude Include="Headers2\ConstOverloadResolution1.h" />
-    <ClInclude Include="Headers2\ConstPointer1.h" />
-    <ClInclude Include="Headers2\ConstRefToPtrAsFuncArg1.h" />
-    <ClInclude Include="Headers2\ContainerLib1.h" />
-    <ClInclude Include="Headers2\CopyByValueCtor_MoveCtor1.h" />
-    <ClInclude Include="Headers2\DefaultConstructor1.h" />
-    <ClInclude Include="Headers2\DefaultCtorCurlyBracesInitializer1.h" />
-    <ClInclude Include="Headers2\DigitDynamicProgramming.h" />
-    <ClInclude Include="Headers2\MemberInitializerListAndStdMove1.h" />
-    <ClInclude Include="Headers2\NamespaceScope1.h" />
-    <ClInclude Include="Headers2\NewArrayAndPointer1.h" />
-    <ClInclude Include="Headers2\NonTemplClassSeparateDeclDef1.h" />
-    <ClInclude Include="Headers2\OperatorNew1.h" />
-    <ClInclude Include="Headers2\RawPtr_Vector_StdOptionalArray1.h" />
-    <ClInclude Include="Headers2\RefOfReturnValue1.h" />
-    <ClInclude Include="Headers2\RefToArrayAsFuncInput1.h" />
-    <ClInclude Include="Headers2\ResetUniquePointer1.h" />
-    <ClInclude Include="Headers2\ReturnValueOptimization1.h" />
-    <ClInclude Include="Headers2\RvalueRefToLvalueRef1.h" />
-    <ClInclude Include="Headers2\SetLowerBound1.h" />
-    <ClInclude Include="Headers2\SortedSet1.h" />
-    <ClInclude Include="Headers2\StringLiterals1.h" />
-    <ClInclude Include="Headers2\ThreadExamples1.h" />
-    <ClInclude Include="Headers2\TrailingReturnType1.h" />
-    <ClInclude Include="Headers2\UniquePtrDemo1.h" />
-    <ClInclude Include="Headers2\Vector1.h" />
-    <ClInclude Include="Headers2\VectorInsert1.h" />
-    <ClInclude Include="Headers2\VectorSeparateDeclareDefine1.h" />
     <ClInclude Include="Headers\Leetcode.h" />
     <ClInclude Include="Headers\LibHeaders.h" />
     <ClInclude Include="Headers\Problems.h" />
@@ -334,7 +265,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\yueku\source\repos\Solution1\Project1\Headers2;C:\Users\yueku\source\repos\Solution1\Project1\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\yueku\source\repos\Solution1\Project1\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

@@ -435,6 +435,9 @@ namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 	public:
 		int maxProfit(vector<int> prices)
 		{
+			if (prices.size() == 1)
+				return 0;
+
 			int firstTradeMax = 0;
 			int secondTradeMax = 0;
 			int twoTradesMax = 0;
@@ -471,10 +474,69 @@ namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 		}
 	};
 
+	// 2, 1, 4, 5, 2, 9, 7      11
+	// 6  1  3  2  4  7         7
+
+	class Solution7
+	{
+		
+	public:
+		int maxProfit(vector<int> prices)
+		{
+			if (prices.size() == 1)
+				return 0;
+
+			int firstTradeMax = 0;
+			int secondTradeMax = 0;
+			int twoTradesMax = 0;
+
+			int firstDelta = prices[1] - prices[0];
+			firstTradeMax = firstDelta > 0 ? firstDelta : 0;
+			int accum1 = firstTradeMax, accum2 = 0;
+
+			size_t len = prices.size();
+			for (size_t i = 2; i < len; i++)
+			{
+				int delta = prices[i] - prices[i - 1];
+				if (delta + accum1 > 0)
+					accum1 += delta;
+				else
+					accum1 = 0;
+
+				if (delta + accum2 > 0)
+				{
+					accum2 += delta;
+					if (twoTradesMax + delta < firstTradeMax + accum2)
+						twoTradesMax = firstTradeMax + accum2;
+					else
+						twoTradesMax += delta;
+				}
+				else
+				{
+					accum2 = 0;
+					if (twoTradesMax + delta < 0)
+						twoTradesMax = firstTradeMax;
+				}
+
+				if (firstTradeMax < accum1)
+				{
+					firstTradeMax = accum1;
+					accum2 = 0;
+				}
+			}
+			return max(firstTradeMax, twoTradesMax);
+		}
+	};
+
+
+
+
+
+
 
 	void Test_0123_Best_Time_to_Buy_Sell_Stock_III()
 	{
-		Solution5 solu;
+		Solution7 solu;
 		string s;
 		vector<int> prices;
 		while (true)

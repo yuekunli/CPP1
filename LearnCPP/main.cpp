@@ -4,8 +4,8 @@ namespace AccessOtherObjectSameClassPrivateMember {
     void Test_AccessOtherObjectSameClassPrivateMember();
 }
 
-namespace AssignToPointerRef1 {
-    void Test_AssignToPointerRef1();
+namespace UniquePtrInitializeAndCopy1 {
+    void Test_UniquePtrInitializeAndCopy1();
 }
 
 namespace BinaryDecimalConvert {
@@ -43,8 +43,7 @@ int main()
 
     //BinaryDecimalConvert::Test_BinaryDecimalConvert();
 
-    AssignToPointerRef1::Test_AssignToPointerRef1();
-
+    UniquePtrInitializeAndCopy1::Test_UniquePtrInitializeAndCopy1();
 
     //AggregatedSmallExamples1::Test_std_div();
 

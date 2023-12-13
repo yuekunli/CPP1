@@ -40,4 +40,6 @@ void Test_stringstream1();
 
 void hourly_annual_salary();
 
+void Test_AssignToPointerRef1();
+
 }

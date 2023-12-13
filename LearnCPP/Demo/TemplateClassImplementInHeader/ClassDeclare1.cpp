@@ -1,4 +1,4 @@
-#include "LibHeaders.h"
+
 #include "VectorSeparateDeclareDefine1.h"
 #include "VectorSeparateDeclareDefine1.cpp"
 
@@ -19,7 +19,7 @@
 // NonTemplClassSeparateDeclDef1.cpp   --   The implementation of a non-template class
 // NonTemplClassSeparateDeclDef1.h     --   The declaration of a non-template class
 
-// It proves that for a non-template class, a different file can use it by only including the declaration.
+// It proves that for a non-template class, a different file can use it even if just including the declaration.
 
 // This file doesn't have a corresponding header file, main.cpp doesn't call the test function defined in this file.
 // This test function is only used to verify compilation
@@ -29,30 +29,15 @@
 
 namespace ClassDeclare1 {
 
+	void Test_ClassDeclare1()
+	{
+		VectorSeparateDeclareDefine1::Vector<int> v { 6 };
+
+		std::cout << v.size() << std::endl;
 
 
+		NonTemplClassSeparateDeclDef1::A obj { 9 };
 
-
-void Test_ClassDeclare1()
-{
-	VectorSeparateDeclareDefine1::Vector<int> v { 6 };
-
-	std::cout << v.size() << std::endl;
-
-
-
-	NonTemplClassSeparateDeclDef1::A obj { 9 };
-
-	std::cout << obj.size() << std::endl;
-
-
-
-
-}
-
-
-
-
-
-
+		std::cout << obj.size() << std::endl;
+	}
 }

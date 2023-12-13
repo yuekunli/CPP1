@@ -1,4 +1,14 @@
-#include "LibHeaders.h"
+#include<iostream>
+#include<iomanip>
+#include<vector>
+#include<sstream>
+#include<array>
+#include<set>
+#include<unordered_set>
+#include<numeric>
+#include<execution>
+
+using namespace std;
 
 namespace AggregatedSmallExamples1 {
 
@@ -728,5 +738,26 @@ void hourly_annual_salary()
 	std::cout << '\n';
 }
 
+
+/*-----------------------------------------------------------------------------------*/
+
+void Test_AssignToPointerRef1()
+{
+	int x = 10;
+
+	int* p2 = &x;
+
+	int y = 20;
+
+	int*& r2 = p2;
+
+	r2 = &y;   // change p2's value, r2 is still bound to p2.
+
+	cout << "x: " << x << ", p2: " << *p2 << ", y: " << y << ", r2: " << *r2 << endl;
+
+	*r2 = 30;
+
+	cout << "x: " << x << ", p2: " << *p2 << ", y: " << y << ", r2: " << *r2 << endl;
+}
 
 }

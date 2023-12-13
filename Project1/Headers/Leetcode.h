@@ -52,6 +52,10 @@ namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 	void Test_0123_Best_Time_to_Buy_Sell_Stock_III();
 }
 
+namespace _0124_Binary_Tree_Maximum_Path_Sum {
+	void Test_0124_Binary_Tree_Maximum_Path_Sum();
+}
+
 namespace _0130_Surrounded_Regions {
 	void Test_0130_Surrounded_Regions();
 }

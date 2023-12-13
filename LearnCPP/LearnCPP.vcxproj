@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\YuekunLi\source\repos\ltc1\LearnCPP;C:\Users\YuekunLi\source\repos\ltc1\LearnCPP\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\yueku\source\repos\Solution1\LearnCPP;C:\Users\yueku\source\repos\Solution1\LearnCPP\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -147,7 +147,7 @@
     <ClInclude Include="Headers\MemberInitializerListAndStdMove1.h" />
     <ClInclude Include="Headers\NamespaceScope1.h" />
     <ClInclude Include="Headers\NewArrayAndPointer1.h" />
-    <ClInclude Include="Headers\NonTemplClassSeparateDeclDef1.h" />
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\NonTemplClassSeparateDeclDef1.h" />
     <ClInclude Include="Headers\OperatorNew1.h" />
     <ClInclude Include="Headers\RawPtr_Vector_StdOptionalArray1.h" />
     <ClInclude Include="Headers\RefOfReturnValue1.h" />
@@ -161,27 +161,27 @@
     <ClInclude Include="Headers\ThreadExamples1.h" />
     <ClInclude Include="Headers\TrailingReturnType1.h" />
     <ClInclude Include="Headers\UniquePtrDemo1.h" />
-    <ClInclude Include="Headers\Vector1.h" />
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\Vector1.h" />
     <ClInclude Include="Headers\VectorInsert1.h" />
-    <ClInclude Include="Headers\VectorSeparateDeclareDefine1.h" />
+    <ClInclude Include="Demo\TemplateClassImplementInHeader\VectorSeparateDeclareDefine1.h" />
     <ClInclude Include="LibHeaders.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\BuiltInAlgo1.cpp" />
-    <ClCompile Include="Demo\ClassDeclare1.cpp" />
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\ClassDeclare1.cpp" />
     <ClCompile Include="Demo\ContainerLib1.cpp" />
     <ClCompile Include="Demo\DigitDynamicProgramming1.cpp" />
-    <ClCompile Include="Demo\NonTemplClassSeparateDeclDef1.cpp" />
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\NonTemplClassSeparateDeclDef1.cpp" />
     <ClCompile Include="Demo\RawPtr_Vector_StdOptionalArray1.cpp" />
     <ClCompile Include="Demo\SortedSet1.cpp" />
     <ClCompile Include="Demo\ThreadExamples1.cpp" />
     <ClCompile Include="Demo\UniquePtrDemo1.cpp" />
-    <ClCompile Include="Demo\Vector1.cpp" />
-    <ClCompile Include="Demo\VectorSeparateDeclareDefine1.cpp" />
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\Vector1.cpp" />
+    <ClCompile Include="Demo\TemplateClassImplementInHeader\VectorSeparateDeclareDefine1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\AccessOtherObjectSameClassPrivateMember.cpp" />
     <ClCompile Include="src\AggregatedSmallExamples1.cpp" />
-    <ClCompile Include="src\AssignToPointerRef1cpp.cpp" />
+    <ClCompile Include="src\UniquePtrInitializeAndCopy1.cpp" />
     <ClCompile Include="src\binary_decimal_convert.cpp" />
     <ClCompile Include="src\CallFunctionInChildClass1.cpp" />
     <ClCompile Include="src\ConstFunction1.cpp" />
