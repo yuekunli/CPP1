@@ -52,6 +52,10 @@ namespace _0127_Word_Ladder {
 	void Test_0127_Word_Ladder();
 }
 
+namespace _0128_Longest_Consecutive_Sequence {
+	void Test_0128_Longest_Consecutive_Sequence();
+}
+
 namespace _0123_Best_Time_to_Buy_Sell_Stock_III {
 	void Test_0123_Best_Time_to_Buy_Sell_Stock_III();
 }

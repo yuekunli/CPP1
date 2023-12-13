@@ -61,7 +61,10 @@ int main()
 
     //_0126_Word_Ladder_II::Test_0126_Word_Ladder_II();
 
-    _0127_Word_Ladder::Test_0127_Word_Ladder();
+    //_0127_Word_Ladder::Test_0127_Word_Ladder();
+
+    _0128_Longest_Consecutive_Sequence::Test_0128_Longest_Consecutive_Sequence();
+
     //_0130_Surrounded_Regions::Test_0130_Surrounded_Regions();
 
     //_0131_Palindrome_Partitioning::Test_0131_Palindrome_Partitioning();

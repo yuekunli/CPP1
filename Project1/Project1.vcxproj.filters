@@ -494,5 +494,11 @@
     <ClCompile Include="Leetcode\0127_Word_Ladder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Leetcode\0128_Longest_Consecutive_Sequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Leetcode\0129_Sum_Root_to_Leaf_Numbers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
