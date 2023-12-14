@@ -88,6 +88,10 @@ namespace _0135_Candy {
 	void Test_0135_Candy();
 }
 
+namespace _0140_Word_Break_II {
+	void Test_0140_Word_Break_II();
+}
+
 namespace _0149_Max_Points_on_a_Line {
 	void Test_0149_Max_Points_on_a_Line();
 }

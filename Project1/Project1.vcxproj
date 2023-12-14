@@ -42,6 +42,7 @@
     <ClCompile Include="Leetcode\0133_Clone_Graph.cpp" />
     <ClCompile Include="Leetcode\0134_Gas_Station.cpp" />
     <ClCompile Include="Leetcode\0135_Candy.cpp" />
+    <ClCompile Include="Leetcode\0140_Word_Break_II.cpp" />
     <ClCompile Include="Leetcode\0149_Max_Points_on_a_Line.cpp" />
     <ClCompile Include="Leetcode\0150_Evaluate_Reverse_Polish_Notation.cpp" />
     <ClCompile Include="Leetcode\0154_Find_Min_in_Rotated_Sorted_Array_II.cpp" />
