@@ -100,6 +100,14 @@ namespace _0150_Evaluate_Reverse_Polish_Notation {
 	void Test_0150_Evaluate_Reverse_Polish_Notation();
 }
 
+namespace _0152_Maximum_Product_Subarray {
+	void Test_0152_Maximum_Product_Subarray();
+}
+
+namespace _0153_Find_Minimum_in_Rotated_Sorted_Array{
+	void Test_0153_Find_Minimum_in_Rotated_Sorted_Array();
+}
+
 namespace _0154_Find_Min_in_Rotated_Sorted_Array_II {
 	void Test_0154_Find_Min_in_Rotated_Sorted_Array_II();
 }

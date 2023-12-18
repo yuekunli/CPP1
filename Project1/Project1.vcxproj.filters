@@ -503,5 +503,11 @@
     <ClCompile Include="Leetcode\0140_Word_Break_II.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Leetcode\0153_Find_Minimum_in_Rotated_Sorted_Array.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Leetcode\0152_Maximum_Product_Subarray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

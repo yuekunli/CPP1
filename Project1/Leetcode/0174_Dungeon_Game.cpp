@@ -15,8 +15,20 @@ namespace _0174_Dungeon_Game {
 
 			vector<vector<int>>records(ROW, vector<int>(COL, -1));
 			records[ROW - 1][COL - 1] = dungeon[ROW - 1][COL - 1] >= 0 ? 1 : (1 - dungeon[ROW - 1][COL - 1]);
-			int r_start = (int)(ROW - 1);
-			int c_start = (int)(COL - 2);
+			int r_start, c_start;
+			if (COL == 1)
+			{
+				// Use the bottome-right corner cell as a lighthouse, I start from its left, go north-ease, arraive at its above.
+				// what if there is only 1 colume, there is no cell to the left of the lighthouse.
+				// I don't need to do special handling when there is only 1 row, the ROW-1 and COL-2 are still valid for having only 1 row
+				r_start = ROW - 2;
+				c_start = 0;
+			}
+			else
+			{
+				r_start = (int)(ROW - 1);
+				c_start = (int)(COL - 2);  
+			}
 			while (r_start >= 0 && c_start >= 0)
 			{
 				int r = r_start;

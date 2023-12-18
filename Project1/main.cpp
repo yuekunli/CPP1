@@ -77,11 +77,15 @@ int main()
 
     //_0135_Candy::Test_0135_Candy();
 
-    _0140_Word_Break_II::Test_0140_Word_Break_II();
+    //_0140_Word_Break_II::Test_0140_Word_Break_II();
 
     //_0149_Max_Points_on_a_Line::Test_0149_Max_Points_on_a_Line();
 
     //_0150_Evaluate_Reverse_Polish_Notation::Test_0150_Evaluate_Reverse_Polish_Notation();
+
+    _0152_Maximum_Product_Subarray::Test_0152_Maximum_Product_Subarray();
+
+    //_0153_Find_Minimum_in_Rotated_Sorted_Array::Test_0153_Find_Minimum_in_Rotated_Sorted_Array();
 
     //_0154_Find_Min_in_Rotated_Sorted_Array_II::Test_0154_Find_Min_in_Rotated_Sorted_Array_II();
 

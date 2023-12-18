@@ -1,4 +1,9 @@
-#include "LibHeaders.h"
+#include<iostream>
+#include<sstream>
+#include<string>
+#include<vector>
+#include<random>
+#include<functional>
 
 namespace _0154_Find_Min_in_Rotated_Sorted_Array_II{
 
@@ -6,6 +11,29 @@ namespace _0154_Find_Min_in_Rotated_Sorted_Array_II{
 
 	// 1 5 5 5 5
 	// 5 5 5 5 7 1
+
+	/*
+	* 
+	* Original array:
+	*                            /
+	*                           /
+	*    /---------------------/
+	*   /
+	*  /
+	* 
+	* 
+	* after rotation:
+	* 
+	*          /
+	*         /
+	*   -----/     --------------------
+	*             /
+	*            /
+	*           /
+	*                    |
+	*                    a points to here. the surrounding elements doesn't provide any help in terms of where the minimum is.
+	* 
+	*/
 
 	class Solution
 	{
@@ -15,7 +43,7 @@ namespace _0154_Find_Min_in_Rotated_Sorted_Array_II{
 		{
 			if (lo == hi && lo != n - 1) return nums[lo + 1];
 
-			int a = (hi - lo) / 2 + lo;
+			size_t a = (hi - lo) / 2 + lo;
 			if (a != n - 1)
 			{
 				if (nums[0] <= nums[a] && nums[a] > nums[a + 1])
