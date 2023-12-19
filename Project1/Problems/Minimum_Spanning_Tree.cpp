@@ -84,6 +84,34 @@ namespace Heap_With_Cannonical_Order_Reference {
 		/*
 		* ExternalData can be non-contiguous, but in this constructor, I'm using contiguous ExternalData,
 		* initial_head: the index of the element in ExternalData array and canonical_array that is going to be the head of the heap initially.
+		* External data vector and HeapElementData vector has a straightforward one-to-one mapping, i.e. the elements at the same index in each
+		* arrays respectively map to each other.
+		* The mapping between HeapElementData and HeapElement is also easy to see, the initial head point to the HeapElement at index 0.
+		* In front of initial head, the HeapElementData and Heap element is skewed by 1, after initial head, it's a straightforward mapping.
+		* 
+		* 
+		*   external data vector           |____|  |____|  |____|   |____|................. |____|
+        *                                    ^        ^       ^        ^                      ^
+		*                                    |        |       |        |                      |
+		*                                    V        V       V        V                      V
+		*    array of HeapElementData      |____|  |____|  |____|   |____|................. |____|
+		*                                     \       \    initial    |                        |
+		*                                      \       \    head      |                        |
+		*                                       \       \  /          |                        |
+		*                                        \       \/           |                        |
+		*                                         \      /\           |                        |
+		*                                          \    /  \          |                        |
+		*                                           \  /    \         |                        |
+		*                                            \/      \        |                        |
+		*                                            /\       \       |                        |
+		*                                           /  \      |       |                        |
+		*                                          /    |     |       |                        |
+		*                                         /     |     |       |                        |
+		*                                        /      |     |       |                        |
+		*                                       /      /      |       |                        |
+		*                                      /      |       |       |                        |
+		*                                     /       |       |       |                        |
+		* heap  (array of HeapElement)     |____|  |____|  |____|   |____|...................|____|
 		*/
 
 		MinHeapCannonicalOrderRef(vector<ExternalData<T>> & ved, size_t initial_head)
@@ -130,7 +158,9 @@ namespace Heap_With_Cannonical_Order_Reference {
 				decrease_key(cannonical_array[cannonical_index].index_in_heap, new_key);
 			}
 		}
-
+		
+		// This heap implementation is tailored for minimum spanning tree, so it doesn't need a generalized increase_key operation
+		// but actually an inline increase_key operation is still needed in extract_min
 		void decrease_key(size_t i, int new_key)
 		{
 			h[i].key = new_key;
@@ -209,9 +239,8 @@ namespace Heap_With_Cannonical_Order_Reference {
 	};
 }
 
-namespace Minimum_Spanning_Tree2 {
-
-	// Try to use the heap implementation
+// this implementation uses the previous heap implementation as a module
+namespace Minimum_Spanning_Tree_With_Heap_Module {
 
 	using namespace Heap_With_Cannonical_Order_Reference;
 
@@ -421,7 +450,7 @@ namespace Minimum_Spanning_Tree2 {
 	}
 
 
-	void Test_Minimum_Spanning_Tree2()
+	void Test_Minimum_Spanning_Tree_With_Heap_Module()
 	{
 		Test2();
 	}
@@ -451,12 +480,12 @@ namespace Minimum_Spanning_Tree {
 	* Each HeapElement has a pointer pointing to the corresponding HeapElementData in the cannonically positioned array
 	* 
 	* These two arrays collaboratively need to support these operations:
-	* (1). Given the ID of a node, quickly find its HeapElement in the heap
+	* (1). Given the ID of a graph node, quickly find its HeapElement in the heap
 	* Use ID to locate HeapElementData in the cannonically positioned array, use the pointer to locate the HeapElement
 	* 
 	* (2). Given a pointer to a HeapElementData, quickly find out which node this is.
 	* This is needed when I extract the head of the heap, I need to know which node has just been picked.
-	* Such extraction gives me a HeapElement, following its pointer, I can get the HeapElementData object, now I need to know which node it represents.
+	* Such extraction gives me a HeapElement, following its pointer, I can get the HeapElementData object, now I need to know which graph node it represents.
 	* HeapElementData has a pointer pointing to the real Node struct
 	* 
 	* (3). Given a pointer to a HeapElement, quickly find out the index of the element in the heap
@@ -523,9 +552,12 @@ namespace Minimum_Spanning_Tree {
 
 
 
+	// this implementation has no private data member, every method can be static
+	// this implementation basically mixes the heap implementation with graph nodes definition.
+	// it specializes the heap implementation for this minimum spanning tree purpose.
+	// ideally, the heap implementation stays independent and is used as a replacable module.
 	class Minimum_Spanning_Tree
 	{
-
 		void swap_elements(vector<HeapElement>& h, size_t a, size_t b)
 		{
 			HeapElement temp(h[a]);
@@ -539,7 +571,6 @@ namespace Minimum_Spanning_Tree {
 			h[a] = h[b];
 			h[b] = temp;
 		}
-
 
 		/*
 		*                 0
@@ -612,6 +643,13 @@ namespace Minimum_Spanning_Tree {
 
 	public:
 
+		// the elements in cannonical array have straightforward 1-to-1 mapping with elements in "nodes" array
+		// i.e. cannonical element at index x maps to "nodes" element at index x.
+		// 
+		// I start with node 0, what if node 0 is disconnected with every thing else?
+		// obivously this implementation has the problem that it only grows a minimum spanning tree
+		// from node 0, and if node 0 happens to be in a rather isolated part of the graph,
+		// this implementation won't examine the majority of the graph.
 		void trim_down(vector<Node> & nodes, vector<AdjInfoNode*>& adj, vector<Edge>& tree)
 		{
 			size_t len = adj.size();
@@ -622,15 +660,13 @@ namespace Minimum_Spanning_Tree {
 
 			for (size_t i = 0; i < len; i++)
 			{
-				h[i].key = i == 0 ? 0 : INT_MAX;
+				h[i].key = i == 0 ? 0 : INT_MAX; // I'll grow the tree from node at index 0
 				h[i].cannonicalPos = &a[i];
 				a[i].data = &nodes[i];
 				a[i].tree_edge_source = NULL;
 				a[i].he = &h[i];
 				a[i].index_in_heap = i;
 			}
-
-			//vector<Edge> tree;
 
 			while (true)
 			{
@@ -644,7 +680,7 @@ namespace Minimum_Spanning_Tree {
 				
 				tree.emplace_back(p, n, min_element.key);
 
-				len--;
+				len--; // len was passed by value in remove_min, so I need to do decrement len here.
 
 				if (len == 0)
 					break;

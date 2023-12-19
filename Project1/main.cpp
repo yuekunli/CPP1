@@ -29,7 +29,7 @@ int main()
 
     //Minimum_Spanning_Tree::Test_Minimum_Spanning_Tree();
 
-    //Minimum_Spanning_Tree2::Test_Minimum_Spanning_Tree2();
+    //Minimum_Spanning_Tree_With_Heap_Module::Test_Minimum_Spanning_Tree_With_Heap_Module();
 
     //-----------------------------------------------------------------------
 

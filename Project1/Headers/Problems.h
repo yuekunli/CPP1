@@ -50,6 +50,6 @@ namespace Minimum_Spanning_Tree {
 	void Test_Minimum_Spanning_Tree();
 }
 
-namespace Minimum_Spanning_Tree2 {
-	void Test_Minimum_Spanning_Tree2();
+namespace Minimum_Spanning_Tree_With_Heap_Module {
+	void Test_Minimum_Spanning_Tree_With_Heap_Module();
 }

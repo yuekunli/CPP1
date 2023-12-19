@@ -8,6 +8,19 @@ namespace _0152_Maximum_Product_Subarray {
 
 	using namespace std;
 
+	/*
+	* If a segment has odd numbers of negative number, I need to exlcude one.
+	* Which one to exclude in order to produce the maximum product?
+	* Do I need to consider excluding the ones in the middle?
+	* No, I only need to consider the ones on both ends.
+	* 
+	* + + + - + + + - + + - + + - + + + - + + + +
+	*       1       2     3     4       5
+	* 
+	* There are 5 negative numbers. The more number I multiple the bigger the absolute of the product.
+	* If I consider excluding the 3rd negative number, neither half is longer than when the segment I get when I exclude 1st or 5th.
+	*/
+
 	class Solution
 	{
 	public:
