@@ -17,10 +17,9 @@ namespace ParseDownloadRange {
     // (4). pick out the range, convert them to a pair, and sort these pairs and print out sorted result
     // Note that the example.log is an original WindowsPatching.log file, step#2 is not done.
 
-    void parseRange()
+    void parseRange(char const * file_path)
     {
-
-        std::ifstream inputFile("example.log");
+        std::ifstream inputFile(file_path);
 
         vector<pair<int, int>> r;
 
@@ -80,10 +79,15 @@ namespace ParseDownloadRange {
     }
 }
 
-
-int main()
+/*
+* Usage:
+* LogFileParser.exe  <path to log file>
+* 
+* When debug, set <path to log file> in the Command Arguments field in Project Properties Debugging section
+*/
+int main(int argc, char* argv[])
 {
-    ParseDownloadRange::parseRange();
+    ParseDownloadRange::parseRange(argv[1]);
 }
 
 
