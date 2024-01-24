@@ -16,6 +16,10 @@ namespace EndianSwap {
     void Test_EndianSwap();
 }
 
+namespace OperatorOverload1 {
+    void Test_OperatorOverload1();
+}
+
 int main()
 {
 
@@ -43,7 +47,14 @@ int main()
 
     //BinaryDecimalConvert::Test_BinaryDecimalConvert();
 
-    UniquePtrInitializeAndCopy1::Test_UniquePtrInitializeAndCopy1();
+    //UniquePtrInitializeAndCopy1::Test_UniquePtrInitializeAndCopy1();
+
+    OperatorOverload1::Test_OperatorOverload1();
+
+
+
+
+
 
     //AggregatedSmallExamples1::Test_std_div();
 
