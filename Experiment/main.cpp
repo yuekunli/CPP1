@@ -10,6 +10,6 @@ namespace OpensslInstallFips {
 
 int main()
 {
-    CheckDotNetVersion::check_dotnet_version();
+    //CheckDotNetVersion::check_dotnet_version();
     OpensslInstallFips::install_fips();
 }

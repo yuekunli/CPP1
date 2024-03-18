@@ -20,6 +20,10 @@ namespace OperatorOverload1 {
     void Test_OperatorOverload1();
 }
 
+namespace Specialized_Template1 {
+    void Test_Specialized_Template1();
+}
+
 int main()
 {
 
@@ -49,8 +53,9 @@ int main()
 
     //UniquePtrInitializeAndCopy1::Test_UniquePtrInitializeAndCopy1();
 
-    OperatorOverload1::Test_OperatorOverload1();
+    //OperatorOverload1::Test_OperatorOverload1();
 
+    Specialized_Template1::Test_Specialized_Template1();
 
 
 

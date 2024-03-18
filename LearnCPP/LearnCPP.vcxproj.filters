@@ -242,5 +242,8 @@
     <ClCompile Include="src\OperatorOverload1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SpecializedTemplate1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

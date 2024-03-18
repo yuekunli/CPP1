@@ -182,6 +182,7 @@
     <ClCompile Include="src\AccessOtherObjectSameClassPrivateMember.cpp" />
     <ClCompile Include="src\AggregatedSmallExamples1.cpp" />
     <ClCompile Include="src\OperatorOverload1.cpp" />
+    <ClCompile Include="src\SpecializedTemplate1.cpp" />
     <ClCompile Include="src\UniquePtrInitializeAndCopy1.cpp" />
     <ClCompile Include="src\binary_decimal_convert.cpp" />
     <ClCompile Include="src\CallFunctionInChildClass1.cpp" />
