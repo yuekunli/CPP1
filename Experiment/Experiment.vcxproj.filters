@@ -24,5 +24,11 @@
     <ClCompile Include="openssl_install_fips.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_modification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Get_Process_Name.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,6 +6,30 @@
 using namespace std;
 
 namespace OpensslInstallFips {
+
+    static std::string& get_command_space_in_folder_name()
+    {
+        char const* openssl_path = "\"C:\\temp\\a    b\\openssl.exe\"";
+        char const* fips_module_path = "\"C:\\temp\\a    b\\fips.dll\"";
+        char const* out_path = "\"C:\\temp\\a    b\\fipsmodule.cnf\"";
+
+        char const* openssl_cmd = "fipsinstall";
+        char const* module_arg = "-module";
+        char const* out_arg = "-out";
+        char const* self_test_arg = "-self_test_oninstall";
+
+        static std::string command;
+
+        command.append("\"").
+            append(openssl_path).append(1, ' ').append(openssl_cmd).append(1, ' ').
+            append(module_arg).append(1, ' ').append(fips_module_path).append(1, ' ').
+            append(out_arg).append(1, ' ').append(out_path).append(1, ' ').append(self_test_arg).
+            append(" 2>&1").
+            append("\"");
+
+        return command;
+    }
+
     static std::string& get_command_string()
     {
         char const* openssl_path = "C:\\ws\\openssl_output\\lib\\x32\\release\\bin\\openssl.exe";
@@ -73,8 +97,7 @@ namespace OpensslInstallFips {
         FILE* pPipe;
         char buf[128];
 
-        std::string const& command = get_command_string();
-        //std::string const& command = get_command_string_with_env_var();
+        std::string const& command = get_command_space_in_folder_name();
 
         if ((pPipe = _popen(command.c_str(), "rt")) == NULL)
         {

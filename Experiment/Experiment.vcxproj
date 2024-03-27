@@ -128,6 +128,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Check_NET_version.cpp" />
+    <ClCompile Include="file_modification.cpp" />
+    <ClCompile Include="Get_Process_Name.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="openssl_install_fips.cpp" />
   </ItemGroup>
