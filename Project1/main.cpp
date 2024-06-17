@@ -31,6 +31,14 @@ int main()
 
     //Minimum_Spanning_Tree_With_Heap_Module::Test_Minimum_Spanning_Tree_With_Heap_Module();
 
+    //Post_Order_Traverse_Iterative::Test_Post_Order_Traverse_Iterative();
+
+    //Rotate_In_Place::Test_Rotate_In_Place();
+
+    //Merge_Sort_Iterative::Test_Merge_Sort_Iterative();
+
+    Merge_In_Place::Test_Merge_In_Place();
+
     //-----------------------------------------------------------------------
 
     //_0004_Median_of_Two_Sorted_Arrays::Test_0004_Median_of_Two_Sorted_Arrays();
@@ -83,7 +91,7 @@ int main()
 
     //_0150_Evaluate_Reverse_Polish_Notation::Test_0150_Evaluate_Reverse_Polish_Notation();
 
-    _0152_Maximum_Product_Subarray::Test_0152_Maximum_Product_Subarray();
+    //_0152_Maximum_Product_Subarray::Test_0152_Maximum_Product_Subarray();
 
     //_0153_Find_Minimum_in_Rotated_Sorted_Array::Test_0153_Find_Minimum_in_Rotated_Sorted_Array();
 

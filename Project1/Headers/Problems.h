@@ -53,3 +53,20 @@ namespace Minimum_Spanning_Tree {
 namespace Minimum_Spanning_Tree_With_Heap_Module {
 	void Test_Minimum_Spanning_Tree_With_Heap_Module();
 }
+
+namespace Post_Order_Traverse_Iterative {
+	void Test_Post_Order_Traverse_Iterative();
+}
+
+namespace Rotate_In_Place {
+	void Test_Rotate_In_Place();
+}
+
+namespace Merge_Sort_Iterative {
+	void Test_Merge_Sort_Iterative();
+}
+
+namespace Merge_In_Place {
+	void test();
+	void Test_Merge_In_Place();
+}
