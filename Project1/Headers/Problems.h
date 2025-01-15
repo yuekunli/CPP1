@@ -36,8 +36,8 @@ namespace Search_Missing_In_Consecutive_Sorted_Array {
 
 
 
-namespace Merge_Two_Sorted_Arrays {
-	void Test_Merge_Two_Sorted_Arrays();
+namespace Merge_Two_Sorted_Arrays_With_Extra_Memory {
+	void Test_Merge_Two_Sorted_Arrays_With_Extra_Memory();
 }
 
 

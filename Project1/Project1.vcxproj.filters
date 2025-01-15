@@ -44,7 +44,7 @@
     <ClCompile Include="Problems\Get_Kth_of_Two_Sorted_Arrays.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Problems\Merge_Sort_Iterative.cpp">
+    <ClCompile Include="Problems\Merge_Sort_Alternatives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Problems\Minimum_Heaviest_Set.cpp">
