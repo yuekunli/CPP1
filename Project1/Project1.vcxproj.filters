@@ -515,5 +515,8 @@
     <ClCompile Include="Problems\Rotate_In_Place.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Problems\Optimal_Search_Tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -33,11 +33,15 @@ int main()
 
     //Rotate_In_Place::Test_Rotate_In_Place();
 
-    Merge_Two_Sorted_Arrays_With_Extra_Memory::Test_Merge_Two_Sorted_Arrays_With_Extra_Memory();
+    //Merge_Two_Sorted_Arrays_With_Extra_Memory::Test_Merge_Two_Sorted_Arrays_With_Extra_Memory();
 
-    Merge_Sort_Iterative::Test_Merge_Sort_Iterative();
+    //Merge_Sort_Iterative::Test_Merge_Sort_Iterative();
 
-    Merge_In_Place::Test_Merge_In_Place();
+    //Merge_In_Place::Test_Merge_In_Place();
+
+    //Optimal_Search_Tree::test_print_tree_neatly();
+
+    Optimal_Search_Tree::test_optimal_search_tree();
 
     //-----------------------------------------------------------------------
 

@@ -175,6 +175,7 @@
     <ClCompile Include="Problems\Merge_Sort_Alternatives.cpp" />
     <ClCompile Include="Problems\Minimum_Heaviest_Set.cpp" />
     <ClCompile Include="Problems\Minimum_Spanning_Tree.cpp" />
+    <ClCompile Include="Problems\Optimal_Search_Tree.cpp" />
     <ClCompile Include="Problems\Parse_Integer_String.cpp" />
     <ClCompile Include="Problems\Post_Order_Traverse_Iterative.cpp" />
     <ClCompile Include="Problems\Related_Groups.cpp" />
